@@ -1,0 +1,230 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.footer {
+  background: $dark-bg;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $primary-gradient;
+  }
+  
+  .footer-content {
+    padding: $spacing-4xl 0 $spacing-xl;
+    
+    @include tablet {
+      padding: $spacing-3xl 0 $spacing-lg;
+    }
+  }
+  
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: $spacing-4xl;
+    margin-bottom: $spacing-3xl;
+    
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: $spacing-3xl;
+      margin-bottom: $spacing-2xl;
+    }
+  }
+  
+  .footer-brand {
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      font-family: $font-secondary;
+      font-size: $fs-3xl;
+      font-weight: 700;
+      margin-bottom: $spacing-lg;
+      
+      .logo-text {
+        color: white;
+        margin-right: 2px;
+      }
+      
+      .logo-dot {
+        color: $primary-color;
+        font-size: $fs-4xl;
+      }
+    }
+    
+    .footer-description {
+      font-size: $fs-base;
+      line-height: 1.6;
+      color: rgba(white, 0.8);
+      margin-bottom: $spacing-xl;
+      max-width: 400px;
+      
+      @include tablet {
+        max-width: none;
+      }
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: $spacing-md;
+      
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: rgba(white, 0.1);
+        border: 2px solid rgba(white, 0.2);
+        border-radius: 50%;
+        @include flex-center;
+        color: rgba(white, 0.8);
+        text-decoration: none;
+        transition: all $transition-normal;
+        
+        &:hover {
+          background: $primary-gradient;
+          border-color: transparent;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px rgba($primary-color, 0.3);
+        }
+        
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-2xl;
+    
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+    }
+    
+    .links-section {
+      h4 {
+        font-size: $fs-lg;
+        font-weight: 700;
+        color: white;
+        margin-bottom: $spacing-lg;
+        
+        @include tablet {
+          font-size: $fs-base;
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          margin-bottom: $spacing-md;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+          
+          a {
+            color: rgba(white, 0.7);
+            text-decoration: none;
+            font-size: $fs-sm;
+            transition: color $transition-normal;
+            
+            &:hover {
+              color: $primary-color;
+            }
+          }
+          
+          span {
+            color: rgba(white, 0.7);
+            font-size: $fs-sm;
+            
+            &:first-child {
+              font-weight: 600;
+              margin-right: $spacing-xs;
+              color: rgba(white, 0.9);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .footer-bottom {
+    @include flex-between;
+    padding-top: $spacing-xl;
+    border-top: 1px solid rgba(white, 0.1);
+    
+    @include tablet {
+      flex-direction: column;
+      gap: $spacing-lg;
+      text-align: center;
+    }
+    
+    .footer-copyright {
+      p {
+        font-size: $fs-sm;
+        color: rgba(white, 0.6);
+        margin: 0;
+      }
+    }
+    
+    .back-to-top {
+      width: 40px;
+      height: 40px;
+      background: rgba(white, 0.1);
+      border: 2px solid rgba(white, 0.2);
+      border-radius: 50%;
+      @include flex-center;
+      color: rgba(white, 0.8);
+      cursor: pointer;
+      transition: all $transition-normal;
+      
+      &:hover {
+        background: $primary-gradient;
+        border-color: transparent;
+        color: white;
+        transform: translateY(-2px);
+      }
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@include mobile {
+  .footer {
+    .footer-main {
+      text-align: center;
+    }
+    
+    .footer-brand {
+      .footer-description {
+        text-align: left;
+      }
+      
+      .footer-social {
+        justify-content: center;
+      }
+    }
+  }
+}

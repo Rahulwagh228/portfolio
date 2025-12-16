@@ -139,10 +139,12 @@ img {
 input, textarea, select {
   width: 100%;
   padding: $spacing-md;
-  border: 2px solid rgba($primary-color, 0.1);
+  border: 2px solid rgba($text-muted, 0.3);
   border-radius: $radius-md;
   font-family: inherit;
   font-size: $fs-base;
+  background: $surface;
+  color: $text-primary;
   transition: border-color $transition-normal;
   
   &:focus {
@@ -161,12 +163,12 @@ input, textarea, select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary-gradient;
+  background: linear-gradient(135deg, $accent-color 0%, $text-muted 100%);
   border-radius: $radius-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);
+  background: linear-gradient(135deg, $text-secondary 0%, $primary-color 100%);
 }
 
 // Animation Classes
