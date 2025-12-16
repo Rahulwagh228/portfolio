@@ -1,19 +1,23 @@
-// Color Palette - Dark Theme
-$primary-color: #ffffff; // White
-$secondary-color: #e5e5e5; // Light gray
-$accent-color: #888888; // Medium gray
-$text-primary: #ffffff; // White text
-$text-secondary: #b3b3b3; // Light gray text
-$text-muted: #666666; // Muted gray text
-$background: #000000; // Black background
-$surface: #111111; // Dark surface
+// Color Palette - Black, White & Off-White Theme
+$primary-color: #000000; // Pure black
+$secondary-color: #333333; // Dark gray
+$accent-color: #666666; // Medium gray
+$text-primary: #000000; // Black text
+$text-secondary: #333333; // Dark gray text
+$text-muted: #666666; // Medium gray text
+$background: #f8f8f8; // Off-white background
+$surface: #ffffff; // Pure white surface
+$background-color: #ffffff; // White background
+$off-white: #f8f8f8; // Off-white
+$white: #ffffff; // Pure white
+$black: #000000; // Pure black
 $dark-bg: #000000; // Black
-$dark-surface: #1a1a1a; // Very dark gray
+$dark-surface: #1a1a1a; // Very dark surface for dark sections
 
 // Gradients
 $primary-gradient: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
-$accent-gradient: linear-gradient(135deg, $accent-color 0%, $primary-color 100%);
-$hero-gradient: linear-gradient(135deg, rgba($primary-color, 0.05) 0%, rgba($accent-color, 0.05) 100%);
+$accent-gradient: linear-gradient(135deg, $accent-color 0%, $text-muted 100%);
+$hero-gradient: linear-gradient(135deg, rgba($primary-color, 0.05) 0%, rgba($accent-color, 0.03) 100%);
 
 // Typography
 $font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

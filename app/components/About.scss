@@ -32,119 +32,167 @@
       order: -1;
     }
     
-    .image-container {
+    .tech-animation-container {
       position: relative;
       width: 450px;
-      height: 550px;
+      height: 450px;
+      @include flex-center;
       
       @include tablet {
         width: 350px;
-        height: 425px;
+        height: 350px;
       }
       
       @include mobile {
         width: 280px;
-        height: 340px;
+        height: 280px;
       }
     }
     
-    .image-background {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 100%;
-      height: 100%;
-      background: $primary-gradient;
-      border-radius: $radius-2xl;
-      z-index: 1;
-    }
-    
-    .about-photo {
+    .rotating-tech-stack {
       position: relative;
-      z-index: 2;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border-radius: $radius-2xl;
-      box-shadow: $shadow-2xl;
-    }
-    
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      border-radius: $radius-2xl;
-      pointer-events: none;
+      animation: rotate-stack 20s linear infinite;
       
-      .overlay-pattern {
+      .tech-item {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-          radial-gradient(circle at 30% 70%, rgba(white, 0.1) 0%, transparent 30%),
-          radial-gradient(circle at 70% 30%, rgba($accent-color, 0.1) 0%, transparent 30%);
-        border-radius: $radius-2xl;
-      }
-      
-      .overlay-gradient {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, transparent 0%, rgba($primary-color, 0.1) 100%);
-        border-radius: $radius-2xl;
-      }
-    }
-    
-    .floating-elements {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      
-      .floating-circle {
-        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: rgba($text-muted, 0.1);
+        border: 2px solid rgba($text-secondary, 0.3);
         border-radius: 50%;
+        @include flex-center;
+        flex-direction: column;
+        gap: $spacing-xs;
+        color: $text-primary;
+        font-size: $fs-xs;
+        font-weight: 600;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        transition: all $transition-normal;
         
-        &.circle-1 {
-          top: -15px;
-          right: -15px;
-          width: 80px;
-          height: 80px;
-          background: rgba($accent-color, 0.2);
-          border: 3px solid rgba($accent-color, 0.5);
-          animation: float 4s ease-in-out infinite;
-        }
-        
-        &.circle-2 {
-          bottom: 40px;
-          left: -25px;
+        @include tablet {
           width: 60px;
           height: 60px;
-          background: rgba($secondary-color, 0.2);
-          border: 2px solid rgba($secondary-color, 0.5);
-          animation: float 6s ease-in-out infinite reverse;
+          font-size: 8px;
+        }
+        
+        @include mobile {
+          width: 50px;
+          height: 50px;
+          font-size: 7px;
+        }
+        
+        svg {
+          width: 24px;
+          height: 24px;
+          
+          @include tablet {
+            width: 18px;
+            height: 18px;
+          }
+          
+          @include mobile {
+            width: 16px;
+            height: 16px;
+          }
+        }
+        
+        &:hover {
+          transform: scale(1.1);
+          background: rgba($primary-color, 0.1);
+          border-color: $primary-color;
+          box-shadow: 0 0 20px rgba($primary-color, 0.3);
+        }
+        
+        &.tech-1 {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          animation-delay: 0s;
+        }
+        
+        &.tech-2 {
+          top: 25%;
+          right: 0;
+          animation-delay: -3.33s;
+        }
+        
+        &.tech-3 {
+          bottom: 25%;
+          right: 0;
+          animation-delay: -6.66s;
+        }
+        
+        &.tech-4 {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          animation-delay: -10s;
+        }
+        
+        &.tech-5 {
+          bottom: 25%;
+          left: 0;
+          animation-delay: -13.33s;
+        }
+        
+        &.tech-6 {
+          top: 25%;
+          left: 0;
+          animation-delay: -16.66s;
         }
       }
+    }
+    
+    .center-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba($primary-color, 0.1) 0%, rgba($accent-color, 0.1) 100%);
+      border: 3px solid rgba($primary-color, 0.3);
+      border-radius: 50%;
+      @include flex-center;
+      flex-direction: column;
+      gap: $spacing-sm;
+      color: $primary-color;
+      font-weight: 700;
+      font-size: $fs-sm;
+      text-align: center;
+      backdrop-filter: blur(15px);
+      animation: pulse-glow 3s ease-in-out infinite;
       
-      .floating-square {
-        position: absolute;
-        top: 60px;
-        left: -20px;
-        width: 40px;
-        height: 40px;
-        background: $primary-gradient;
-        border-radius: $radius-md;
-        opacity: 0.8;
-        animation: rotate 8s linear infinite;
+      @include tablet {
+        width: 100px;
+        height: 100px;
+        font-size: $fs-xs;
+      }
+      
+      @include mobile {
+        width: 80px;
+        height: 80px;
+        font-size: 10px;
+      }
+      
+      .center-icon {
+        svg {
+          width: 32px;
+          height: 32px;
+          
+          @include tablet {
+            width: 26px;
+            height: 26px;
+          }
+          
+          @include mobile {
+            width: 20px;
+            height: 20px;
+          }
+        }
       }
     }
   }
@@ -156,7 +204,7 @@
       .section-label {
         display: inline-block;
         padding: $spacing-xs $spacing-md;
-        background: rgba($text-muted, 0.2);
+        background: rgba($text-primary, 0.1);
         color: $text-primary;
         border-radius: $radius-full;
         font-size: $fs-sm;
@@ -346,6 +394,26 @@
 }
 
 // Animations
+@keyframes rotate-stack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba($primary-color, 0.3);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba($primary-color, 0.5);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);

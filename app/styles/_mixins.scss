@@ -59,7 +59,7 @@
 @mixin button-primary {
   @include button-base;
   background: $primary-color;
-  color: $background;
+  color: $surface;
   box-shadow: $shadow-md;
   border: 2px solid $primary-color;
   
@@ -70,7 +70,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba($background, 0.1) 0%, rgba($background, 0) 100%);
+    background: linear-gradient(135deg, rgba($surface, 0.1) 0%, rgba($surface, 0) 100%);
     opacity: 0;
     transition: opacity $transition-normal;
   }
@@ -92,13 +92,14 @@
 
 @mixin button-secondary {
   @include button-base;
-  background: rgba($text-muted, 0.1);
+  background: transparent;
   color: $text-primary;
-  border: 2px solid rgba($text-muted, 0.3);
+  border: 2px solid $text-secondary;
   
   &:hover {
-    background: rgba($text-muted, 0.2);
-    border-color: rgba($text-secondary, 0.5);
+    background: $text-primary;
+    color: $surface;
+    border-color: $text-primary;
     transform: translateY(-2px);
   }
 }
@@ -113,7 +114,7 @@
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-xl;
-    border-color: rgba($text-secondary, 0.3);
+    border-color: rgba($text-primary, 0.2);
   }
 }
 

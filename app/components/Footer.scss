@@ -2,8 +2,8 @@
 @use '../styles/mixins' as *;
 
 .footer {
-  background: $dark-bg;
-  color: white;
+  background: $primary-color;
+  color: $surface;
   position: relative;
   overflow: hidden;
   
@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: $primary-gradient;
+    background: linear-gradient(135deg, $accent-color 0%, $text-muted 100%);
   }
   
   .footer-content {
@@ -48,12 +48,12 @@
       margin-bottom: $spacing-lg;
       
       .logo-text {
-        color: white;
+        color: $surface;
         margin-right: 2px;
       }
       
       .logo-dot {
-        color: $primary-color;
+        color: $accent-color;
         font-size: $fs-4xl;
       }
     }
@@ -61,7 +61,7 @@
     .footer-description {
       font-size: $fs-base;
       line-height: 1.6;
-      color: rgba(white, 0.8);
+      color: rgba($surface, 0.8);
       margin-bottom: $spacing-xl;
       max-width: 400px;
       
@@ -77,20 +77,20 @@
       .social-link {
         width: 50px;
         height: 50px;
-        background: rgba(white, 0.1);
-        border: 2px solid rgba(white, 0.2);
+        background: rgba($surface, 0.1);
+        border: 2px solid rgba($surface, 0.2);
         border-radius: 50%;
         @include flex-center;
-        color: rgba(white, 0.8);
+        color: rgba($surface, 0.8);
         text-decoration: none;
         transition: all $transition-normal;
         
         &:hover {
-          background: $primary-gradient;
+          background: $surface;
           border-color: transparent;
-          color: white;
+          color: $primary-color;
           transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba($primary-color, 0.3);
+          box-shadow: 0 10px 20px rgba($surface, 0.3);
         }
         
         svg {

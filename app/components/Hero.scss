@@ -6,7 +6,7 @@
   min-height: 100vh;
   @include flex-center;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba($text-muted, 0.05) 0%, rgba($accent-color, 0.05) 100%);
+  background: $background;
   
   .hero-background {
     position: absolute;
@@ -24,7 +24,7 @@
       .floating-element {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba($text-secondary, 0.1) 0%, rgba($accent-color, 0.1) 100%);
+        background: linear-gradient(135deg, rgba($text-muted, 0.1) 0%, rgba($accent-color, 0.1) 100%);
         opacity: 0.3;
         
         &.element-1 {
