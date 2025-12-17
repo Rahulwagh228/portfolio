@@ -26,6 +26,10 @@
   @media (max-width: $tablet) {
     padding: 0 $spacing-md;
   }
+  
+  @media (max-width: $mobile) {
+    padding: 0 $spacing-md;
+  }
 }
 
 @mixin section-padding {
@@ -33,6 +37,10 @@
   
   @media (max-width: $tablet) {
     padding: $spacing-3xl 0;
+  }
+  
+  @media (max-width: $mobile) {
+    padding: $spacing-2xl 0;
   }
 }
 

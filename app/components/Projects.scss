@@ -50,6 +50,12 @@
     gap: $spacing-md;
     margin-bottom: $spacing-3xl;
     flex-wrap: wrap;
+    padding: 0 $spacing-md;
+    
+    @include mobile {
+      gap: $spacing-sm;
+      margin-bottom: $spacing-2xl;
+    }
     
     .filter-btn {
       padding: $spacing-md $spacing-xl;
@@ -61,6 +67,11 @@
       font-size: $fs-sm;
       cursor: pointer;
       transition: all $transition-normal;
+      
+      @include mobile {
+        padding: $spacing-sm $spacing-md;
+        font-size: $fs-xs;
+      }
       
       &:hover {
         border-color: rgba($text-secondary, 0.5);
@@ -85,12 +96,13 @@
     margin-bottom: $spacing-3xl;
     
     @include tablet {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: 1fr;
       gap: $spacing-xl;
     }
     
     @include mobile {
       grid-template-columns: 1fr;
+      gap: $spacing-lg;
     }
     
     .project-card {

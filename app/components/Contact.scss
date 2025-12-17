@@ -53,6 +53,10 @@
       grid-template-columns: 1fr;
       gap: $spacing-3xl;
     }
+    
+    @include mobile {
+      gap: $spacing-2xl;
+    }
   }
   
   .contact-info {

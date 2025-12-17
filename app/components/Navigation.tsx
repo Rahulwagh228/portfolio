@@ -120,7 +120,10 @@ const Navigation = () => {
       </div>
       
       {/* Mobile menu overlay */}
-      <div className={`mobile-overlay ${isMenuOpen ? 'active' : ''}`} />
+      <div 
+        className={`mobile-overlay ${isMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
     </nav>
   );
 };

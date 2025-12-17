@@ -54,6 +54,10 @@
       gap: $spacing-lg;
     }
     
+    @include mobile {
+      gap: $spacing-md;
+    }
+    
     .skill-category {
       padding: $spacing-2xl;
       background: $surface;
