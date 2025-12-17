@@ -4,9 +4,22 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  width: 100%;
   @include flex-center;
   overflow: hidden;
   background: $background;
+
+  .hero-background {
+  position: relative;
+  min-height: 100vh;
+  background-color: #0a0a0a;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+
+  background-size: 80px 80px;
+}
   
   .hero-background {
     position: absolute;
@@ -16,10 +29,68 @@
     height: 100%;
     z-index: 1;
     
+    // Grid background pattern
+    background-image: 
+      linear-gradient(rgba($text-muted, 0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($text-muted, 0.25) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: -1px -1px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, transparent 0%, rgba($background, 0.8) 70%);
+      z-index: 1;
+    }
+    
+    .grid-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      
+      .grid-lines {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        
+        .grid-line {
+          position: absolute;
+          background: linear-gradient(90deg, transparent, rgba($accent-color, 0.6), transparent);
+          opacity: 0.7;
+          animation: gridPulse 4s ease-in-out infinite alternate;
+          
+          &.horizontal {
+            width: 100%;
+            height: 1px;
+            
+            &:nth-child(1) { top: 25%; animation-delay: 0s; }
+            &:nth-child(2) { top: 50%; animation-delay: 1s; }
+            &:nth-child(3) { top: 75%; animation-delay: 2s; }
+          }
+          
+          &.vertical {
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(transparent, rgba($accent-color, 0.6), transparent);
+            
+            &:nth-child(4) { left: 25%; animation-delay: 0.5s; }
+            &:nth-child(5) { left: 50%; animation-delay: 1.5s; }
+            &:nth-child(6) { left: 75%; animation-delay: 2.5s; }
+          }
+        }
+      }
+    }
+
     .floating-elements {
       position: absolute;
       width: 100%;
       height: 100%;
+      z-index: 2;
       
       .floating-element {
         position: absolute;
@@ -316,6 +387,12 @@
       }
     }
   }
+}
+
+// Keyframes
+@keyframes gridPulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.8; }
 }
 
 // Animations

@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import './Navigation.scss';
 
 const Navigation = () => {
-  const navRef = useRef<HTMLNavigationElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -67,7 +67,7 @@ const Navigation = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href.replace('#', '.'));
+    const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
