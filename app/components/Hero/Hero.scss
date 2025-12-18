@@ -160,6 +160,7 @@
       line-height: 1.1;
       margin-bottom: $spacing-lg;
       font-family: $font-secondary;
+      color: white;
       
       @include tablet {
         font-size: $fs-5xl;
@@ -180,6 +181,7 @@
       font-weight: 600;
       color: $text-secondary;
       margin-bottom: $spacing-xl;
+      color: white;
       
       @include tablet {
         font-size: $fs-xl;
@@ -191,6 +193,7 @@
       color: $text-muted;
       margin-bottom: $spacing-2xl;
       max-width: 500px;
+      color: white;
       
       @include tablet {
         font-size: $fs-base;

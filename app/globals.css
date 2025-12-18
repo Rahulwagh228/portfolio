@@ -1,10 +1,7 @@
-@use './styles/variables' as *;
-@use './styles/mixins' as *;
-
-// Import Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
-// Reset and Base Styles
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -17,159 +14,121 @@ html {
 }
 
 body {
-  font-family: $font-primary;
-  color: $text-primary;
-  background: $background;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  color: #e5e7eb;
+  background: #0a0a0a;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Global Utility Classes
-.container {
-  @include container;
-}
-
-.section-padding {
-  @include section-padding;
-}
-
+/* Global Utility Classes */
 .text-center {
   text-align: center;
 }
 
-.text-gradient {
-  @include text-gradient;
-}
-
-.btn-primary {
-  @include button-primary;
-}
-
-.btn-secondary {
-  @include button-secondary;
-}
-
-.card {
-  @include card;
-}
-
-// Typography
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: $spacing-md;
+  margin-bottom: 1.5rem;
 }
 
 h1 {
-  font-size: $fs-5xl;
-  
-  @include tablet {
-    font-size: $fs-4xl;
-  }
+  font-size: 4rem;
 }
 
 h2 {
-  font-size: $fs-4xl;
-  
-  @include tablet {
-    font-size: $fs-3xl;
-  }
+  font-size: 3rem;
 }
 
 h3 {
-  font-size: $fs-3xl;
-  
-  @include tablet {
-    font-size: $fs-2xl;
-  }
+  font-size: 2.25rem;
 }
 
 h4 {
-  font-size: $fs-2xl;
+  font-size: 1.875rem;
 }
 
 h5 {
-  font-size: $fs-xl;
+  font-size: 1.5rem;
 }
 
 h6 {
-  font-size: $fs-lg;
+  font-size: 1.25rem;
 }
 
 p {
-  margin-bottom: $spacing-md;
-  color: $text-secondary;
-  font-size: $fs-lg;
-  
-  @include tablet {
-    font-size: $fs-base;
-  }
+  margin-bottom: 1.5rem;
+  color: #9ca3af;
+  font-size: 1.125rem;
 }
 
-// Links
+/* Links */
 a {
-  color: $primary-color;
+  color: #667eea;
   text-decoration: none;
-  transition: color $transition-normal;
-  
-  &:hover {
-    color: $secondary-color;
-  }
+  transition: color 0.3s ease;
 }
 
-// Lists
+a:hover {
+  color: #764ba2;
+}
+
+/* Lists */
 ul, ol {
-  margin-bottom: $spacing-md;
-  padding-left: $spacing-lg;
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
 }
 
 li {
-  margin-bottom: $spacing-xs;
+  margin-bottom: 0.5rem;
 }
 
-// Images
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-// Form Elements
+/* Form Elements */
 input, textarea, select {
   width: 100%;
-  padding: $spacing-md;
-  border: 2px solid rgba($primary-color, 0.1);
-  border-radius: $radius-md;
+  padding: 1rem;
+  border: 2px solid rgba(102, 126, 234, 0.1);
+  border-radius: 0.5rem;
   font-family: inherit;
-  font-size: $fs-base;
-  transition: border-color $transition-normal;
-  
-  &:focus {
-    outline: none;
-    border-color: $primary-color;
-  }
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
 }
 
-// Scrollbar Styling
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: $surface;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary-gradient;
-  border-radius: $radius-full;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);
+  background: linear-gradient(135deg, #5568d3 0%, #654090 100%);
 }
 
-// Animation Classes
+/* Animation Classes */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -190,15 +149,31 @@ input, textarea, select {
   transform: scale(0.9);
 }
 
-// Responsive utilities
-.mobile-only {
-  @include desktop {
+/* Responsive utilities */
+@media (min-width: 1024px) {
+  .mobile-only {
     display: none !important;
   }
 }
 
-.desktop-only {
-  @include tablet {
+@media (max-width: 768px) {
+  .desktop-only {
     display: none !important;
+  }
+  
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+  }
+  
+  h3 {
+    font-size: 1.875rem;
+  }
+  
+  p {
+    font-size: 1rem;
   }
 }
