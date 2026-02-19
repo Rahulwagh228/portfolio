@@ -104,7 +104,7 @@ const Navigation = () => {
           
           <div className="nav-actions">
             <button className="btn-primary nav-cta">
-              <span>Let's Talk</span>
+              <span>{"Let's"} Talk</span>
             </button>
             
             <button 

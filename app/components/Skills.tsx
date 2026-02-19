@@ -12,7 +12,6 @@ if (typeof window !== 'undefined') {
 
 const Skills = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
-  const skillsGridRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

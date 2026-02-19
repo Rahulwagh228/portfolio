@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import AnimatedTypography from "../AnimatedTypography";
 import "./Hero.scss";
@@ -7,7 +7,6 @@ import "./Hero.scss";
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +24,7 @@ const Hero = () => {
         <div className="hero-content">
           <div className="hero-text">
             <h1 ref={titleRef} className="hero-title text-white">
-              Hi, I'm <span className="text-white">Rahul Wagh</span>
+              Hi, {"I'm"} <span className="text-white">Rahul Wagh</span>
             </h1>
 
             {/* <p ref={subtitleRef} className="hero-subtitle">
@@ -40,11 +39,11 @@ const Hero = () => {
               />
             </p> */}
             <h1 className="text-4xl font-light hero-title">
-              Crafting{" "}
+              {" "}
               <AnimatedTypography
-                words={["beautiful", "functional", "user-centered", "scalable"]}
-              />{" "}
-              experiences
+                words={["A Full Stack ", "Node js", "Next js","Frontend", "Backend"]}
+              />
+              <br/>Developer
             </h1>
             <p className="hero-description">
               Crafting beautiful, functional, and user-centered digital

@@ -213,7 +213,7 @@ const About = () => {
             
             <div className="about-description">
               <p>
-                I'm a passionate Full Stack Developer with over 3 years of experience 
+                {"I'm"} a passionate Full Stack Developer with over 3 years of experience 
                 creating digital experiences that are not only functional but also 
                 beautiful and intuitive. My journey in web development started with 
                 a curiosity about how things work behind the scenes.
@@ -226,7 +226,7 @@ const About = () => {
               </p>
               
               <p>
-                When I'm not coding, you'll find me exploring new technologies, 
+                When {"I'm"} not coding, {"you'll"} find me exploring new technologies, 
                 contributing to open-source projects, or sharing my knowledge 
                 through technical writing and mentoring.
               </p>
