@@ -1,0 +1,63 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: $z-cursor;
+  mix-blend-mode: difference;
+
+  @media (hover: none) {
+    display: none;
+  }
+
+  .cursor-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: $white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease;
+  }
+
+  .cursor-ring {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba($white, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba($primary, 0.2) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  &.hovering {
+    .cursor-ring {
+      border-color: $primary;
+      
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    .cursor-dot {
+      background: $primary;
+    }
+  }
+}

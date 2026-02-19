@@ -1,216 +1,275 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import './Projects.scss';
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles } from "lucide-react";
+import "./Projects.scss";
 
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  longDescription: string;
+  image: string;
+  icon: React.ElementType;
+  technologies: string[];
+  features: string[];
+  github?: string;
+  live?: string;
+  status: "completed" | "in-progress" | "upcoming";
 }
 
 const Projects = () => {
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const filtersRef = useRef<HTMLDivElement>(null);
-  const projectsGridRef = useRef<HTMLDivElement>(null);
-  const [activeFilter, setActiveFilter] = useState('all');
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate filter buttons
-      gsap.fromTo(filtersRef.current?.children || [],
-        {
-          y: 30,
-          opacity: 0
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: filtersRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Animate project cards
-      gsap.fromTo('.project-card',
-        {
-          y: 50,
-          opacity: 0,
-          scale: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: projectsGridRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-    }, projectsRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const filters = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'web', label: 'Web Apps' },
-    { id: 'mobile', label: 'Mobile' },
-    { id: 'ui', label: 'UI/UX' }
-  ];
-
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.',
-      image: '/images/project1.jpg',
-      category: 'web',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#'
+      title: "Kobichat",
+      description: "Real-time communication platform",
+      longDescription:
+        "A feature-rich real-time chat application built with Socket.io, enabling instant messaging and conversation rooms.",
+      image: "/images/kobichat.png",
+      icon: MessageSquare,
+      technologies: ["Next.js", "Socket.io", "Node.js", "MongoDB", "TypeScript"],
+      features: [
+        "Real-time messaging",
+        "Conversation rooms",
+        "Event-driven architecture",
+        "Scalable backend",
+      ],
+      github: "https://github.com/Rahulwagh228",
+      status: "in-progress",
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A productivity app with real-time collaboration features. Built with Next.js, TypeScript, and Prisma with a modern, intuitive interface.',
-      image: '/images/project2.jpg',
-      category: 'web',
-      technologies: ['Next.js', 'TypeScript', 'Prisma', 'Tailwind'],
-      liveUrl: '#',
-      githubUrl: '#'
+      title: "Note AI App",
+      description: "AI-powered intelligent note-taking",
+      longDescription:
+        "An intelligent note-taking application powered by OpenAI, featuring semantic search and smart organization.",
+      image: "/images/noteai.png",
+      icon: Brain,
+      technologies: ["Next.js", "OpenAI API", "MongoDB Atlas", "Pinecone", "Tailwind", "Shadcn"],
+      features: [
+        "AI-powered insights",
+        "Semantic search",
+        "Vector embeddings",
+        "Smart organization",
+      ],
+      github: "https://github.com/Rahulwagh228",
+      status: "completed",
     },
     {
       id: 3,
-      title: 'Mobile Weather App',
-      description: 'A React Native weather application with location-based forecasts, beautiful animations, and offline support.',
-      image: '/images/project3.jpg',
-      category: 'mobile',
-      technologies: ['React Native', 'Redux', 'Weather API'],
-      liveUrl: '#',
-      githubUrl: '#'
+      title: "Trade Tracker",
+      description: "Trading performance analytics",
+      longDescription:
+        "A comprehensive trading performance visualization dashboard with real-time analytics and portfolio tracking.",
+      image: "/images/tradetracker.png",
+      icon: TrendingUp,
+      technologies: ["Next.js", "Supabase", "PostgreSQL", "Recharts", "Redux"],
+      features: [
+        "Performance visualization",
+        "Real-time analytics",
+        "Portfolio tracking",
+        "Trade history",
+      ],
+      github: "https://github.com/Rahulwagh228",
+      status: "completed",
     },
-    {
-      id: 4,
-      title: 'Portfolio Website',
-      description: 'A stunning portfolio website with smooth animations, dark mode, and responsive design. Built with modern web technologies.',
-      image: '/images/project4.jpg',
-      category: 'ui',
-      technologies: ['Next.js', 'GSAP', 'SCSS', 'Framer Motion'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      id: 5,
-      title: 'Social Media Dashboard',
-      description: 'An analytics dashboard for social media management with real-time data visualization and reporting features.',
-      image: '/images/project5.jpg',
-      category: 'web',
-      technologies: ['React', 'Chart.js', 'Express', 'PostgreSQL'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      id: 6,
-      title: 'Design System',
-      description: 'A comprehensive design system with reusable components, design tokens, and documentation for consistent UI development.',
-      image: '/images/project6.jpg',
-      category: 'ui',
-      technologies: ['Figma', 'Storybook', 'React', 'Design Tokens'],
-      liveUrl: '#',
-      githubUrl: '#'
-    }
   ];
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+  };
+
+  const getStatusColor = (status: Project["status"]) => {
+    switch (status) {
+      case "completed":
+        return "status-completed";
+      case "in-progress":
+        return "status-progress";
+      case "upcoming":
+        return "status-upcoming";
+      default:
+        return "";
+    }
+  };
 
   return (
-    <section ref={projectsRef} className="projects section-padding">
-      <div className="container">
-        <div className="section-header text-center">
-          <span className="section-label">My Work</span>
-          <h2>Featured Projects</h2>
+    <section ref={sectionRef} className="projects" id="projects">
+      {/* Background */}
+      <div className="projects-background">
+        <div className="glow-orb orb-1" />
+        <div className="glow-orb orb-2" />
+        <div className="grid-pattern" />
+      </div>
+
+      <motion.div
+        className="container"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        {/* Section Header */}
+        <motion.div className="section-header" variants={itemVariants}>
+          <span className="section-label">
+            <Sparkles size={14} />
+            Featured Work
+          </span>
+          <h2 className="section-title">
+            Creative
+            <br />
+            <span className="gradient-text">Projects</span>
+          </h2>
           <p className="section-description">
-            A collection of projects that showcase my skills in web development, 
-            mobile apps, and UI/UX design. Each project represents a unique challenge solved.
+            A showcase of my recent projects, each crafted with attention to detail
+            and a focus on performance.
           </p>
-        </div>
-        
-        <div ref={filtersRef} className="project-filters">
-          {filters.map(filter => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`filter-btn ${
-                activeFilter === filter.id ? 'active' : ''
-              }`}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <motion.article
+              key={project.id}
+              className="project-card"
+              variants={itemVariants}
+              onMouseEnter={() => setHoveredProject(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
+              whileHover={{ y: -12 }}
             >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-        
-        <div ref={projectsGridRef} className="projects-grid">
-          {filteredProjects.map(project => (
-            <div key={project.id} className="project-card">
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-overlay">
-                  <div className="project-actions">
-                    <a href={project.liveUrl} className="action-btn">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M15 3H21V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
-                    <a href={project.githubUrl} className="action-btn">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 19C4 20.5 4 16.5 2 16M22 16V22L22 16C22 13 20 12 17 12H7C4 12 2 13 2 16V16C2 16.5 4 20.5 9 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
+              {/* Animated Border */}
+              <div className="card-border" />
+
+              {/* Card Content */}
+              <div className="card-inner">
+                {/* Header */}
+                <div className="card-header">
+                  <motion.div
+                    className="project-icon"
+                    animate={{
+                      rotate: hoveredProject === project.id ? 360 : 0,
+                    }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <project.icon size={28} />
+                  </motion.div>
+
+                  <div className="project-meta">
+                    <span className={`status-badge ${getStatusColor(project.status)}`}>
+                      {project.status === "in-progress" ? "In Progress" : project.status}
+                    </span>
                   </div>
                 </div>
-              </div>
-              
-              <div className="project-content">
+
+                {/* Title & Description */}
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
-                
-                <div className="project-technologies">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
+                <p className="project-long-description">{project.longDescription}</p>
+
+                {/* Features */}
+                <div className="project-features">
+                  {project.features.map((feature, i) => (
+                    <motion.span
+                      key={feature}
+                      className="feature-tag"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.4 + index * 0.1 + i * 0.05 }}
+                    >
+                      {feature}
+                    </motion.span>
                   ))}
                 </div>
+
+                {/* Technologies */}
+                <div className="project-technologies">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="project-actions">
+                  {project.github && (
+                    <motion.a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="action-btn"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Github size={18} />
+                      <span>Code</span>
+                    </motion.a>
+                  )}
+                  {project.live && (
+                    <motion.a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="action-btn primary"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ExternalLink size={18} />
+                      <span>Live Demo</span>
+                    </motion.a>
+                  )}
+                </div>
               </div>
-            </div>
+
+              {/* Hover Glow Effect */}
+              <motion.div
+                className="card-glow"
+                animate={{
+                  opacity: hoveredProject === project.id ? 1 : 0,
+                }}
+              />
+            </motion.article>
           ))}
         </div>
-        
-        <div className="projects-cta text-center">
-          <button className="btn-secondary">
-            <span>View All Projects</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+
+        {/* View More */}
+        <motion.div className="view-more" variants={itemVariants}>
+          <motion.a
+            href="https://github.com/Rahulwagh228"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Github size={20} />
+            View All Projects on GitHub
+          </motion.a>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

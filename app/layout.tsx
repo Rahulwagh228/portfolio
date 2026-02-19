@@ -1,4 +1,7 @@
 import "./globals.scss";
+import CustomCursor from "./components/CustomCursor";
+import MouseGlow from "./components/MouseGlow";
+import PageLoader from "./components/PageLoader";
 
 export const metadata = {
   title: 'Rahul Wagh - Full Stack Developer & UI/UX Designer',
@@ -21,10 +24,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="theme-color" content="#6366f1" />
+        <meta name="theme-color" content="#7C3AED" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
+        <PageLoader />
+        <CustomCursor />
+        <MouseGlow />
         {children}
       </body>
     </html>
