@@ -100,7 +100,7 @@ const Contact = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };

@@ -1,5 +1,4 @@
 @use "../styles/variables" as *;
-@use "../styles/mixins" as *;
 
 .custom-cursor {
   position: fixed;
@@ -7,57 +6,78 @@
   left: 0;
   pointer-events: none;
   z-index: $z-cursor;
-  mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (hover: none) {
     display: none;
   }
 
-  .cursor-dot {
+  // Typing cursor line - elegant vertical bar
+  .cursor-line {
     position: absolute;
-    width: 8px;
-    height: 8px;
-    background: $white;
-    border-radius: 50%;
+    width: 2px;
+    height: 24px;
+    background: linear-gradient(180deg, transparent 0%, $primary 30%, $primary 70%, transparent 100%);
+    border-radius: 1px;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s ease;
+    box-shadow: 0 0 8px rgba($primary, 0.4);
   }
 
-  .cursor-ring {
+  // Subtle trailing dot
+  .cursor-trail {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba($white, 0.5);
+    width: 6px;
+    height: 6px;
+    background: $primary;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease;
+    transform: translate(-50%, -50%) translateY(18px);
+    opacity: 0.4;
+  }
 
-    &::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba($primary, 0.2) 0%,
-        transparent 70%
-      );
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+  // Cursor text label
+  .cursor-text {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $primary;
+    background: rgba($background, 0.9);
+    padding: 4px 10px;
+    border-radius: $radius-md;
+    border: 1px solid rgba($primary, 0.2);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(8px);
   }
 
   &.hovering {
-    .cursor-ring {
-      border-color: $primary;
-      
-      &::before {
-        opacity: 1;
-      }
+    .cursor-line {
+      background: linear-gradient(180deg, transparent 0%, $highlight 30%, $highlight 70%, transparent 100%);
+      box-shadow: 0 0 12px rgba($highlight, 0.5);
     }
 
-    .cursor-dot {
-      background: $primary;
+    .cursor-trail {
+      background: $highlight;
+    }
+  }
+
+  &.has-text {
+    .cursor-line {
+      height: 28px;
+    }
+  }
+}
+
+// Hide default cursor when custom cursor is active
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+    
+    a, button, [role="button"], input, textarea, select {
+      cursor: none;
     }
   }
 }

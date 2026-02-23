@@ -43,20 +43,20 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.3,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
@@ -96,7 +96,7 @@ const About = () => {
                 </div>
 
                 <p className="about-text">
-                  Full-Stack Developer with <strong>1+ years of experience</strong> building 
+                  Full-Stack Developer with <strong>2+ years of experience</strong> building 
                   scalable web applications. I specialize in modern technologies like 
                   <span className="highlight"> Next.js</span>, 
                   <span className="highlight"> Node.js</span>, 

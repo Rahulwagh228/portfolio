@@ -136,8 +136,8 @@ const Skills = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
@@ -203,9 +203,9 @@ const Skills = () => {
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${skill.level}%` } : {}}
                         transition={{
-                          duration: 1,
+                          duration: 1.2,
                           delay: 0.3 + categoryIndex * 0.1 + skillIndex * 0.05,
-                          ease: [0.25, 0.46, 0.45, 0.94] as const,
+                          ease: [0.22, 1, 0.36, 1] as const,
                         }}
                         style={{
                           background: `linear-gradient(90deg, ${category.color}, ${category.color}80)`,

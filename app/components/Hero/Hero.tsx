@@ -50,20 +50,20 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
+        staggerChildren: 0.15,
+        delayChildren: 0.4,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
+        duration: 1,
+        ease: [0.22, 1, 0.36, 1] as const, // Smooth cubic-bezier
       },
     },
   };
@@ -235,6 +235,33 @@ const Hero = () => {
                 ))}
               </motion.div>
             </div>
+
+            {/* Avatar/Illustration Section */}
+            <motion.div 
+              className="hero-avatar"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 1, ease: [0.22, 1, 0.36, 1] as const }}
+            >
+              <div className="avatar-container">
+                <div className="avatar-glow" />
+                <div className="avatar-ring" />
+                <motion.div 
+                  className="avatar-image"
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  {/* Placeholder avatar - replace with actual cartoon image */}
+                  <div className="avatar-placeholder">
+                    <span className="avatar-initials">RW</span>
+                  </div>
+                </motion.div>
+                <div className="avatar-badge">
+                  <Code2 size={16} />
+                  <span>Developer</span>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Stats Section */}
             <motion.div className="hero-stats" variants={itemVariants}>

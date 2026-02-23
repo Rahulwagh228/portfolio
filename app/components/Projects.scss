@@ -82,11 +82,14 @@
     rgba($secondary, 0.3) 50%,
     rgba($highlight, 0.3) 100%
   );
+  mask: 
+    linear-gradient(#fff, #fff) content-box,
+    linear-gradient(#fff, #fff);
   -webkit-mask: 
     linear-gradient(#fff, #fff) content-box,
     linear-gradient(#fff, #fff);
-  -webkit-mask-composite: xor;
   mask-composite: exclude;
+  -webkit-mask-composite: xor;
   opacity: 0.5;
   transition: opacity $transition-normal;
 }
