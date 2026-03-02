@@ -9,6 +9,7 @@ const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(heroRef, { once: true });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState<Array<{ id: number; left: string; top: string; duration: number; delay: number }>>([]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -37,6 +38,16 @@ const Hero = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    setParticles([...Array(20)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 4 + Math.random() * 4,
+      delay: Math.random() * 2,
+    })));
+  }, []);
 
   const stats = [
     { value: "1+", label: "Years Experience" },
@@ -113,9 +124,9 @@ const Hero = () => {
 
         {/* Floating Particles */}
         <div className="particles">
-          {[...Array(20)].map((_, i) => (
+          {particles.map((particle) => (
             <motion.div
-              key={i}
+              key={particle.id}
               className="particle"
               initial={{ opacity: 0, scale: 0 }}
               animate={{
@@ -124,13 +135,13 @@ const Hero = () => {
                 y: [-20, 20, -20],
               }}
               transition={{
-                duration: 4 + Math.random() * 4,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: particle.delay,
               }}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: particle.left,
+                top: particle.top,
               }}
             />
           ))}
