@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles } from "lucide-react";
+import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles, Globe, Layout, Store } from "lucide-react";
 import "./Projects.scss";
 
 interface Project {
@@ -30,15 +30,15 @@ const Projects = () => {
       title: "Kobichat",
       description: "Real-time communication platform",
       longDescription:
-        "A feature-rich real-time chat application built with Socket.io, enabling instant messaging and conversation rooms.",
+        "A feature-rich real-time chat application built with Socket.io, enabling instant messaging and conversation rooms. Backend hosted on Linode using Docker & Nginx, frontend deployed on Vercel.",
       image: "/images/kobichat.png",
       icon: MessageSquare,
-      technologies: ["Next.js", "Socket.io", "Node.js", "MongoDB", "TypeScript"],
+      technologies: ["Next.js", "Socket.io", "Node.js", "MongoDB", "Docker", "Nginx", "Linode"],
       features: [
         "Real-time messaging",
         "Conversation rooms",
-        "Event-driven architecture",
-        "Scalable backend",
+        "Dockerized backend",
+        "Nginx reverse proxy",
       ],
       github: "https://github.com/Rahulwagh228",
       status: "in-progress",
@@ -76,6 +76,63 @@ const Projects = () => {
         "Portfolio tracking",
         "Trade history",
       ],
+      github: "https://github.com/Rahulwagh228",
+      status: "completed",
+    },
+    {
+      id: 4,
+      title: "RadAssist",
+      description: "Teleradiology company website",
+      longDescription:
+        "A professional company website for RadAssist Teleradiology — offering expert CT, MRI, and X-ray reporting with consistent accuracy and round-the-clock availability.",
+      image: "/images/radassist.png",
+      icon: Globe,
+      technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+      features: [
+        "Responsive design",
+        "Service showcase",
+        "Modern UI/UX",
+        "Fast performance",
+      ],
+      live: "https://website-frontend-five-swart.vercel.app/",
+      github: "https://github.com/RadassistTele/Website-Frontend",
+      status: "completed",
+    },
+    {
+      id: 5,
+      title: "Vivek Sonawane Portfolio",
+      description: "Personal portfolio website",
+      longDescription:
+        "A visually stunning personal portfolio website built for Vivek Sonawane — featuring multilingual support, dynamic animations, and a modern dark theme.",
+      image: "/images/vivek-portfolio.png",
+      icon: Layout,
+      technologies: ["Next.js", "TypeScript", "Framer Motion", "SCSS"],
+      features: [
+        "Multi-language support",
+        "Dynamic animations",
+        "Dark premium theme",
+        "Responsive layout",
+      ],
+      live: "https://vivek-alpha.vercel.app/",
+      github: "https://github.com/Rahulwagh228",
+      status: "completed",
+    },
+    {
+      id: 6,
+      title: "Bholenath Cybercafe",
+      description: "Digital services platform",
+      longDescription:
+        "A full-featured digital services platform for Bholenath Cybercafe — enabling online government document applications with user authentication and service management.",
+      image: "/images/bholenath-cybercafe.png",
+      icon: Store,
+      technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Vercel"],
+      features: [
+        "User authentication",
+        "Service management",
+        "Document applications",
+        "Bilingual interface",
+      ],
+      live: "https://bholenath-cybercafe.vercel.app/",
       github: "https://github.com/Rahulwagh228",
       status: "completed",
     },
