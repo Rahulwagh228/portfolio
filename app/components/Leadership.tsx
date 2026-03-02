@@ -50,6 +50,21 @@ const Leadership = () => {
         "Supported event planning and execution",
       ],
     },
+    {
+      id: 3,
+      title: "Election Campaign Manager",
+      organization: "Political Campaign 2026",
+      description:
+        "Led an election campaign as Campaign Manager for 15 days, managing bulk communications, political strategies, and a dedicated team to drive voter outreach.",
+      icon: Target,
+      color: "#FF2E63",
+      achievements: [
+        "Managed bulk messaging & calling operations",
+        "Developed political strategies & outreach plans",
+        "Led a team of 5 campaign members",
+        "Coordinated ground-level campaign for 15 days",
+      ],
+    },
   ];
 
   const containerVariants = {

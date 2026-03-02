@@ -5,28 +5,28 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { Menu, X, Code2, Github, Linkedin } from "lucide-react";
 import "./Navigation.scss";
 
+const navLinks = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "education", label: "Education" },
+  { id: "courses", label: "Courses" },
+  { id: "leadership", label: "Leadership" },
+  { id: "contact", label: "Contact" },
+];
+
+const socialLinks = [
+  { href: "https://github.com/Rahulwagh228", icon: Github, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/rahul-wagh-845061218/", icon: Linkedin, label: "LinkedIn" },
+];
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
-
-  const navLinks = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
-    { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
-    { id: "education", label: "Education" },
-    { id: "courses", label: "Courses" },
-    { id: "leadership", label: "Leadership" },
-    { id: "contact", label: "Contact" },
-  ];
-
-  const socialLinks = [
-    { href: "https://github.com/Rahulwagh228", icon: Github, label: "GitHub" },
-    { href: "https://www.linkedin.com/in/rahul-wagh-845061218/", icon: Linkedin, label: "LinkedIn" },
-  ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);

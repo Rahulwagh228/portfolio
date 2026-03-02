@@ -136,7 +136,7 @@ const About = () => {
 
           {/* Highlight Cards */}
           <div className="about-highlights">
-            {highlights.map((item, index) => (
+            {highlights.map((item) => (
               <motion.div
                 key={item.title}
                 className="highlight-card"

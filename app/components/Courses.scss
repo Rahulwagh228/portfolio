@@ -177,6 +177,16 @@
   svg {
     color: #4ade80;
   }
+
+  &.in-progress {
+    background: rgba($highlight, 0.15);
+    border: 1px solid rgba($highlight, 0.3);
+    color: $highlight;
+
+    svg {
+      color: $highlight;
+    }
+  }
 }
 
 // Course Content

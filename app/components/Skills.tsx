@@ -159,7 +159,10 @@ const Skills = () => {
       >
         {/* Section Header */}
         <motion.div className="section-header" variants={itemVariants}>
-          <span className="section-label">Tech Stack</span>
+          <span className="section-label">
+            <Cpu size={14} />
+            Tech Stack
+          </span>
           <h2 className="section-title">
             Skills &
             <br />

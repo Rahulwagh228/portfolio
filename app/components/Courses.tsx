@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { BookOpen, User, ExternalLink, CheckCircle } from "lucide-react";
+import { BookOpen, User, CheckCircle, Clock } from "lucide-react";
 import Image from "next/image";
 import "./Courses.scss";
 
@@ -14,6 +14,7 @@ interface Course {
   image: string;
   topics: string[];
   link?: string;
+  status: "completed" | "in-progress";
 }
 
 const Courses = () => {
@@ -33,6 +34,7 @@ const Courses = () => {
         "TCP/UDP Server Design",
         "Wireshark & TCPDUMP",
       ],
+      status: "completed",
     },
     {
       id: 2,
@@ -46,6 +48,7 @@ const Courses = () => {
         "WebSockets & gRPC",
         "TLS 1.2 & TLS 1.3",
       ],
+      status: "completed",
     },
     {
       id: 3,
@@ -59,6 +62,7 @@ const Courses = () => {
         "Profiling & Monitoring",
         "System Bottleneck Analysis",
       ],
+      status: "in-progress",
     },
     {
       id: 4,
@@ -72,6 +76,7 @@ const Courses = () => {
         "Replication & Concurrency",
         "Database Engines & Security",
       ],
+      status: "completed",
     },
     {
       id: 5,
@@ -85,6 +90,7 @@ const Courses = () => {
         "Virtual Memory",
         "Socket Programming & I/O",
       ],
+      status: "completed",
     },
   ];
 
@@ -165,9 +171,9 @@ const Courses = () => {
                 <div className="image-overlay">
                   <span className="platform-badge">{course.platform}</span>
                 </div>
-                <div className="completed-badge">
-                  <CheckCircle size={14} />
-                  Completed
+                <div className={`completed-badge ${course.status === "in-progress" ? "in-progress" : ""}`}>
+                  {course.status === "in-progress" ? <Clock size={14} /> : <CheckCircle size={14} />}
+                  {course.status === "in-progress" ? "In Progress" : "Completed"}
                 </div>
               </div>
 
