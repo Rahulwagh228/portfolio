@@ -134,7 +134,7 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             © {currentYear} Rahul Wagh. Built with{" "}
-            <Heart size={14} className="heart-icon" /> using Next.js & Framer Motion
+            <Heart size={14} className="heart-icon" /> using Next.js,
           </motion.p>
 
           <motion.button
