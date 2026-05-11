@@ -1,7 +1,10 @@
 import "./globals.scss";
+// @ts-ignore - CSS side-effect import
+import "lenis/dist/lenis.css";
 import CustomCursor from "./components/CustomCursor";
 import MouseGlow from "./components/MouseGlow";
 import PageLoader from "./components/PageLoader";
+import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata = {
   title: 'Rahul Wagh - Full Stack Developer & UI/UX Designer',
@@ -28,6 +31,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
+        <SmoothScroll />
         <PageLoader />
         <CustomCursor />
         <MouseGlow />

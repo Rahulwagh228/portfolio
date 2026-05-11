@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles, Globe, Layout, Store } from "lucide-react";
+import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles, Layout, Store, GraduationCap } from "lucide-react";
 import "./Projects.scss";
 
 interface Project {
@@ -27,6 +27,25 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
+      title: "Classly",
+      description: "Classes management system",
+      longDescription:
+        "A comprehensive classes management system for coaching institutes — manage classes, batches, students, attendance, fees, and day-to-day operations from a single dashboard.",
+      image: "/images/classly.png",
+      icon: GraduationCap,
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Vercel"],
+      features: [
+        "Batch & class management",
+        "Student records",
+        "Attendance tracking",
+        "Admin dashboard",
+      ],
+      live: "https://class-tech-sooty.vercel.app/",
+      github: "https://github.com/Rahulwagh228",
+      status: "completed",
+    },
+    {
+      id: 2,
       title: "Kobichat",
       description: "Real-time communication platform",
       longDescription:
@@ -44,7 +63,7 @@ const Projects = () => {
       status: "in-progress",
     },
     {
-      id: 2,
+      id: 3,
       title: "Note AI App",
       description: "AI-powered intelligent note-taking",
       longDescription:
@@ -62,8 +81,8 @@ const Projects = () => {
       status: "completed",
     },
     {
-      id: 3,
-      title: "Trade Tracker",
+      id: 4,
+      title: "Trade Vault",
       description: "Trading performance analytics",
       longDescription:
         "A comprehensive trading performance visualization dashboard with real-time analytics and portfolio tracking.",
@@ -76,26 +95,8 @@ const Projects = () => {
         "Portfolio tracking",
         "Trade history",
       ],
+      live: "https://trade-vault.in",
       github: "https://github.com/Rahulwagh228",
-      status: "completed",
-    },
-    {
-      id: 4,
-      title: "RadAssist",
-      description: "Teleradiology company website",
-      longDescription:
-        "A professional company website for RadAssist Teleradiology — offering expert CT, MRI, and X-ray reporting with consistent accuracy and round-the-clock availability.",
-      image: "/images/radassist.png",
-      icon: Globe,
-      technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-      features: [
-        "Responsive design",
-        "Service showcase",
-        "Modern UI/UX",
-        "Fast performance",
-      ],
-      live: "https://website-frontend-five-swart.vercel.app/",
-      github: "https://github.com/RadassistTele/Website-Frontend",
       status: "completed",
     },
     {
