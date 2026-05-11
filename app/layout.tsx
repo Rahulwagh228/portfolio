@@ -1,5 +1,4 @@
 import "./globals.scss";
-// @ts-ignore - CSS side-effect import
 import "lenis/dist/lenis.css";
 import CustomCursor from "./components/CustomCursor";
 import MouseGlow from "./components/MouseGlow";

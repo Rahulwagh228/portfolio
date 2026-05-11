@@ -163,7 +163,7 @@
 }
 
 // Social Links
-.social-links {
+.footer-socials .social-links {
   display: flex;
   gap: $spacing-md;
 
@@ -172,22 +172,38 @@
   }
 
   a {
-    width: 44px;
-    height: 44px;
-    display: flex;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba($surface, 0.5);
-    border: 1px solid rgba($primary, 0.2);
+    background: rgba($surface, 0.6);
+    border: 1px solid rgba($primary, 0.35);
     border-radius: $radius-lg;
-    color: $text-secondary;
+    color: $text-primary;
     transition: all $transition-normal;
+    font-size: 0;
+    line-height: 0;
+
+    svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 2;
+      color: $text-primary;
+      flex-shrink: 0;
+      display: block;
+    }
 
     &:hover {
-      background: rgba($primary, 0.1);
+      background: rgba($primary, 0.12);
       border-color: $primary;
       color: $primary-light;
       box-shadow: $glow-primary;
+
+      svg {
+        color: $primary-light;
+      }
     }
   }
 }
