@@ -1,5 +1,5 @@
 import "./globals.scss";
-import "lenis/dist/lenis.css";
+// import "lenis/dist/lenis.css";
 import CustomCursor from "./components/CustomCursor";
 import MouseGlow from "./components/MouseGlow";
 import PageLoader from "./components/PageLoader";
