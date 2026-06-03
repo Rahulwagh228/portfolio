@@ -1,4 +1,9 @@
 import "./globals.scss";
+import "lenis/dist/lenis.css";
+import CustomCursor from "./components/CustomCursor";
+import MouseGlow from "./components/MouseGlow";
+import PageLoader from "./components/PageLoader";
+import SmoothScroll from "./components/SmoothScroll";
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
@@ -22,10 +27,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="theme-color" content="#6366f1" />
+        <meta name="theme-color" content="#7C3AED" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
+        <SmoothScroll />
+        <PageLoader />
+        <CustomCursor />
+        <MouseGlow />
         {children}
         <GoogleAnalytics gaId="G-V82Z3E4JB1" />
       </body>

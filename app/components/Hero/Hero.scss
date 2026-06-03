@@ -2,458 +2,572 @@
 @use '../../styles/mixins' as *;
 
 .hero {
-  position: relative;
   min-height: 100vh;
-  width: 100%;
-  @include flex-center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: linear-gradient(to bottom, #000000 0%, #1a1a1a 40%, #333333 80%, #ffffff 100%) !important;
-  
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    
-    // Grid background pattern
-    background-image: 
-      linear-gradient(rgba($text-muted, 0.35) 1px, transparent 1px),
-      linear-gradient(90deg, rgba($text-muted, 0.25) 1px, transparent 1px);
-    // background-color: black;
-    background-size: 50px 50px;
-    background-position: -1px -1px;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      // background: radial-gradient(circle at center, transparent 0%, rgba($background, 0.8) 70%);
-      z-index: -1;
-    }
-    
-    .grid-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      
-      .grid-lines {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        
-        .grid-line {
-          position: absolute;
-          background: linear-gradient(90deg, transparent, rgba($accent-color, 0.6), transparent);
-          opacity: 0.7;
-          animation: gridPulse 4s ease-in-out infinite alternate;
-          
-          &.horizontal {
-            width: 100%;
-            height: 1px;
-            
-            &:nth-child(1) { top: 25%; animation-delay: 0s; }
-            &:nth-child(2) { top: 50%; animation-delay: 1s; }
-            &:nth-child(3) { top: 75%; animation-delay: 2s; }
-          }
-          
-          &.vertical {
-            width: 1px;
-            height: 100%;
-            background: linear-gradient(transparent, rgba($accent-color, 0.6), transparent);
-            
-            &:nth-child(4) { left: 25%; animation-delay: 0.5s; }
-            &:nth-child(5) { left: 50%; animation-delay: 1.5s; }
-            &:nth-child(6) { left: 75%; animation-delay: 2.5s; }
-          }
-        }
-      }
-    }
+  padding: $spacing-4xl 0;
 
-    .floating-elements {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 20;
-      
-      .floating-element {
-        position: absolute;
-        border-radius: 50%;
-        // background: linear-gradient(135deg, rgba($text-muted, 0.1) 0%, rgba($accent-color, 0.1) 100%);
-        background-color: #0a0a0a;
-        opacity: 0.3;
-        
-        &.element-1 {
-          top: 10%;
-          left: 10%;
-          width: 120px;
-          height: 120px;
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        &.element-2 {
-          top: 20%;
-          right: 15%;
-          width: 80px;
-          height: 80px;
-          background: $accent-gradient;
-          animation: float 8s ease-in-out infinite reverse;
-        }
-        
-        &.element-3 {
-          bottom: 30%;
-          left: 20%;
-          width: 60px;
-          height: 60px;
-          animation: float 7s ease-in-out infinite;
-        }
-        
-        &.element-4 {
-          bottom: 15%;
-          right: 25%;
-          width: 100px;
-          height: 100px;
-          background: linear-gradient(135deg, rgba($secondary-color, 0.3) 0%, rgba($primary-color, 0.3) 100%);
-          animation: float 5s ease-in-out infinite reverse;
-        }
-      }
-    }
+  @include tablet {
+    padding: $spacing-3xl 0;
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: $spacing-4xl;
   }
-  
-  .container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
-  
-  .hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-4xl;
-    align-items: center;
-    min-height: 80vh;
-    padding: $spacing-2xl 0;
-    
-    @include tablet {
-      grid-template-columns: 1fr;
-      gap: $spacing-2xl;
-      text-align: center;
-      min-height: auto;
-      padding: $spacing-3xl 0;
-    }
-    
-    @include mobile {
-      gap: $spacing-xl;
-      padding: $spacing-2xl 0;
-    }
-  }
-  
-  .hero-text {
-    .hero-title {
-      font-size: $fs-6xl;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: $spacing-lg;
-      font-family: $font-secondary;
-      color: white;
-      
-      @include tablet {
-        font-size: $fs-5xl;
-      }
-      
-      @include mobile {
-        font-size: $fs-4xl;
-      }
-      
-      .char {
-        display: inline-block;
-        transition: color 0.3s ease;
-      }
-    }
-    
-    .hero-subtitle {
-      font-size: $fs-2xl;
-      font-weight: 600;
-      color: $text-secondary;
-      margin-bottom: $spacing-xl;
-      color: white;
-      
-      @include tablet {
-        font-size: $fs-xl;
-      }
-    }
-    
-    .hero-description {
-      font-size: $fs-lg;
-      color: $text-muted;
-      margin-bottom: $spacing-2xl;
-      max-width: 500px;
-      color: white;
-      
-      @include tablet {
-        font-size: $fs-base;
-        max-width: none;
-      }
-    }
-  }
-  
-  .hero-social-buttons {
-    display: flex;
-    gap: $spacing-md;
-    flex-wrap: wrap;
-    margin-top: $spacing-lg;
-    
-    @include tablet {
-      justify-content: center;
-    }
-    
-    @include mobile {
-      justify-content: center;
-      gap: $spacing-sm;
-    }
-    
-    .social-btn {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      overflow: visible;
-      
-      @include mobile {
-        width: 45px;
-        height: 45px;
-      }
-      
-      svg {
-        width: 24px;
-        height: 24px;
-        position: relative;
-        z-index: 2;
-        transition: transform 0.3s ease;
-        
-        @include mobile {
-          width: 20px;
-          height: 20px;
-        }
-      }
-      
-      // Animated circle border
-      &::before {
-        content: '';
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border-radius: 50%;
-        background: conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #4facfe, #00f2fe, #667eea);
-        opacity: 0;
-        z-index: 1;
-        transition: opacity 0.3s ease;
-        animation: rotateBorder 3s linear infinite;
-      }
-      
-      // Inner glow effect
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.05);
-        z-index: 1;
-        transition: all 0.3s ease;
-      }
-      
-      &:hover {
-        transform: translateY(-5px);
-        border-color: transparent;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        
-        &::before {
-          opacity: 1;
-        }
-        
-        &::after {
-          background: rgba(255, 255, 255, 0.1);
-        }
-        
-        svg {
-          transform: scale(1.1) rotate(5deg);
-        }
-      }
-      
-      // Active/Click state
-      &:active {
-        transform: translateY(-2px);
-      }
-    }
-  }
-  
-  .hero-image {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    
-    @include tablet {
-      order: -1;
-    }
-    
-    .image-container {
-      position: relative;
-      width: 400px;
-      height: 500px;
-      // background-color: rgba(0, 0, 0, 0.5);
-      
-      @include tablet {
-        width: 300px;
-        height: 375px;
-      }
-      
-      @include mobile {
-        width: 250px;
-        height: 312px;
-      }
-    }
-    
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: $radius-2xl;
-      z-index: 2;
-      pointer-events: none;
-      background-color: rgba(0, 0, 0, 0.5);
-      
-    }
-    
-    .profile-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: $radius-2xl;
-      position: relative;
-      z-index: 1;
-      box-shadow: $shadow-2xl;
-    }
-    
-    .image-decoration {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      
-      .decoration-circle {
-        position: absolute;
-        border: 3px solid rgba($primary-color, 0.3);
-        border-radius: 50%;
-        
-        &.circle-1 {
-          top: -10px;
-          right: -10px;
-          width: 60px;
-          height: 60px;
-          background: rgba($accent-color, 0.1);
-          animation: pulse 3s ease-in-out infinite;
-        }
-        
-        &.circle-2 {
-          bottom: 20px;
-          left: -20px;
-          width: 40px;
-          height: 40px;
-          z-index: 10;
-          border-color: #000;
-          background: #000;
-          animation: pulse 3s ease-in-out infinite reverse;
-        }
-      }
-      
-      .decoration-square {
-        position: absolute;
-        top: 50px;
-        left: -30px;
-        width: 30px;
-        height: 30px;
-        background: #2563EB ;
-        border-radius: $radius-sm;
-        opacity: 0.7;
-        animation: rotate 8s linear infinite;
-      }
-    }
-  }
-  
 }
 
-// Keyframes
-@keyframes gridPulse {
-  0% { opacity: 0.4; }
-  100% { opacity: 0.8; }
+// Background Effects
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    will-change: transform;
+
+    &-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba($primary, 0.3) 0%, transparent 70%);
+      top: -200px;
+      left: -100px;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    &-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($secondary, 0.2) 0%, transparent 70%);
+      bottom: -150px;
+      right: -100px;
+      animation: float 18s ease-in-out infinite reverse;
+    }
+
+    &-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba($highlight, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse-glow 10s ease-in-out infinite;
+    }
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: $primary;
+      border-radius: 50%;
+      box-shadow: 0 0 10px $primary;
+    }
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba($primary, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($primary, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  }
+}
+
+// Floating Tech Icons
+.floating-icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  .floating-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba($surface, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: $radius-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary-light;
+    box-shadow: $glow-primary;
+
+    &:nth-child(1) {
+      top: 20%;
+      right: 15%;
+
+      @include tablet {
+        top: 10%;
+        right: 10%;
+      }
+    }
+
+    &:nth-child(2) {
+      bottom: 30%;
+      left: 10%;
+
+      @include tablet {
+        display: none;
+      }
+    }
+
+    &:nth-child(3) {
+      top: 60%;
+      right: 8%;
+
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+}
+
+// Main Content
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr 300px auto;
+  gap: $spacing-3xl;
+  align-items: center;
+
+  @include desktop {
+    grid-template-columns: 1fr 250px;
+    gap: $spacing-2xl;
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+    text-align: center;
+  }
+}
+
+.hero-text {
+  max-width: 700px;
+
+  @include tablet {
+    max-width: 100%;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  background: rgba($primary, 0.1);
+  border: 1px solid rgba($primary, 0.3);
+  border-radius: $radius-full;
+  margin-bottom: $spacing-xl;
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: $secondary;
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+    box-shadow: 0 0 10px $secondary;
+  }
+
+  span {
+    font-size: $fs-sm;
+    font-weight: 500;
+    color: $text-secondary;
+    letter-spacing: 0.02em;
+  }
+}
+
+.hero-title {
+  margin-bottom: $spacing-lg;
+
+  .title-line {
+    display: block;
+    font-size: clamp(1.5rem, 4vw, $fs-3xl);
+    font-weight: 500;
+    color: $text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  .title-name {
+    display: block;
+    font-size: clamp(3rem, 10vw, $fs-7xl);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .gradient-text {
+    @include text-gradient-animated;
+    @include text-glow;
+  }
+}
+
+.hero-role {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+
+  @include tablet {
+    justify-content: center;
+  }
+
+  .role-text {
+    font-size: $fs-lg;
+    font-weight: 600;
+    color: $text-primary;
+
+    @include mobile {
+      font-size: $fs-base;
+    }
+  }
+
+  .role-divider {
+    color: $primary;
+    font-weight: 300;
+  }
+}
+
+.hero-description {
+  font-size: $fs-xl;
+  line-height: 1.8;
+  color: $text-secondary;
+  margin-bottom: $spacing-2xl;
+  max-width: 550px;
+
+  @include tablet {
+    font-size: $fs-lg;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.hero-cta {
+  display: flex;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+
+  @include tablet {
+    justify-content: center;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    @include button-base;
+    padding: $spacing-md $spacing-2xl;
+    font-size: $fs-base;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: $gradient-primary;
+    color: $white;
+    box-shadow: $glow-primary;
+    gap: $spacing-sm;
+
+    &:hover {
+      box-shadow: $glow-intense;
+    }
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: $text-primary;
+    border: 2px solid rgba($primary, 0.5);
+
+    &:hover {
+      background: rgba($primary, 0.1);
+      border-color: $primary;
+    }
+  }
+}
+
+.hero-socials {
+  display: flex;
+  gap: $spacing-md;
+
+  @include tablet {
+    justify-content: center;
+  }
+
+  .social-link {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($surface, 0.5);
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: $radius-lg;
+    color: $text-secondary;
+    transition: all $transition-normal;
+
+    &:hover {
+      background: rgba($primary, 0.1);
+      border-color: $primary;
+      color: $primary-light;
+      box-shadow: $glow-primary;
+    }
+  }
+}
+
+// Stats Section
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-card {
+  @include glass-card;
+  padding: $spacing-xl;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $card-shadow-hover, $glow-primary;
+  }
+
+  .stat-value {
+    font-size: $fs-4xl;
+    font-weight: 800;
+    @include text-gradient;
+    line-height: 1;
+
+    @include mobile {
+      font-size: $fs-3xl;
+    }
+  }
+
+  .stat-label {
+    font-size: $fs-sm;
+    color: $text-secondary;
+    font-weight: 500;
+  }
+}
+
+// Scroll Indicator
+.scroll-indicator {
+  position: absolute;
+  bottom: $spacing-2xl;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  @include tablet {
+    display: none;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    color: $text-muted;
+    text-decoration: none;
+    transition: color $transition-normal;
+
+    &:hover {
+      color: $primary-light;
+    }
+
+    span {
+      font-size: $fs-sm;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    svg {
+      opacity: 0.7;
+    }
+  }
+}
+
+// Avatar Section
+.hero-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @include tablet {
+    order: -1;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.avatar-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include tablet {
+    width: 220px;
+    height: 220px;
+  }
+
+  @include mobile {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+.avatar-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba($primary, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
+  animation: pulse-avatar 4s ease-in-out infinite;
+}
+
+.avatar-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient($background, $background) padding-box,
+              linear-gradient(135deg, $primary 0%, $highlight 50%, $secondary 100%) border-box;
+  opacity: 0.6;
+}
+
+.avatar-image {
+  position: relative;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, $surface 0%, $background-secondary 100%);
+  border: 1px solid rgba($primary, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba($white, 0.05);
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($highlight, 0.1) 100%);
+  
+  .avatar-initials {
+    font-size: 4rem;
+    font-weight: 700;
+    background: $gradient-primary;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+
+    @include tablet {
+      font-size: 3rem;
+    }
+
+    @include mobile {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: rgba($background, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($primary, 0.3);
+  border-radius: $radius-full;
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: $primary;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  svg {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-avatar {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
 }
 
 // Animations
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0) rotate(0deg);
   }
-  50% {
-    transform: translateY(-20px);
+  33% {
+    transform: translateY(-30px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(15px) rotate(-3deg);
   }
 }
 
-@keyframes pulse {
+@keyframes pulse-glow {
   0%, 100% {
-    transform: scale(1);
-    opacity: 0.7;
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    transform: scale(1.1);
     opacity: 1;
-  }
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rotateBorder {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes scroll-indicator {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(20px);
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }

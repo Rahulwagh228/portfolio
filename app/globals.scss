@@ -1,20 +1,30 @@
 @use './styles/variables' as *;
 @use './styles/mixins' as *;
 
+// ==========================================
+// PREMIUM GLOBAL STYLES - AWWWARDS LEVEL
+// ==========================================
+
 // Import Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 // Reset and Base Styles
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   overflow-x: hidden;
+  @include scrollbar-custom;
+  
+  @include tablet {
+    font-size: 15px;
+  }
   
   @include mobile {
     font-size: 14px;
@@ -25,14 +35,102 @@ body {
   font-family: $font-primary;
   color: $text-primary;
   background: $background;
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   min-height: 100vh;
+  position: relative;
+  @include selection;
+  
+  // Subtle background grid
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba($primary, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($primary, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: -1;
+  }
 }
 
-// Global Utility Classes
+// ==========================================
+// TYPOGRAPHY
+// ==========================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-lg;
+  color: $text-primary;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, $fs-7xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, $fs-5xl);
+  
+  &.section-title {
+    @include text-gradient;
+    display: inline-block;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, $fs-3xl);
+}
+
+h4 {
+  font-size: $fs-2xl;
+}
+
+h5 {
+  font-size: $fs-xl;
+}
+
+h6 {
+  font-size: $fs-lg;
+}
+
+p {
+  margin-bottom: $spacing-lg;
+  color: $text-secondary;
+  font-size: $fs-lg;
+  line-height: 1.8;
+}
+
+// ==========================================
+// LINKS & BUTTONS
+// ==========================================
+
+a {
+  color: $primary-light;
+  text-decoration: none;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $secondary;
+  }
+}
+
+button {
+  font-family: $font-primary;
+}
+
+// ==========================================
+// UTILITY CLASSES
+// ==========================================
+
 .container {
   @include container;
 }
@@ -49,6 +147,14 @@ body {
   @include text-gradient;
 }
 
+.text-gradient-animated {
+  @include text-gradient-animated;
+}
+
+.text-glow {
+  @include text-glow;
+}
+
 .btn-primary {
   @include button-primary;
 }
@@ -57,181 +163,484 @@ body {
   @include button-secondary;
 }
 
+.btn-ghost {
+  @include button-ghost;
+}
+
 .card {
   @include card;
 }
 
-// Typography
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: $spacing-md;
+.glass-card {
+  @include glass-card;
 }
 
-h1 {
-  font-size: $fs-5xl;
+// ==========================================
+// SECTION STYLES
+// ==========================================
+
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: $spacing-4xl;
   
-  @include tablet {
-    font-size: $fs-4xl;
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    background: rgba($primary, 0.1);
+    border: 1px solid rgba($primary, 0.3);
+    border-radius: $radius-full;
+    font-size: $fs-sm;
+    font-weight: 600;
+    color: $primary-light;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: $spacing-lg;
+    
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: $primary;
+      border-radius: 50%;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+  }
+  
+  .section-title {
+    @include text-gradient;
+    margin-bottom: $spacing-md;
+  }
+  
+  .section-description {
+    max-width: 600px;
+    margin: 0 auto;
+    color: $text-secondary;
   }
 }
 
-h2 {
-  font-size: $fs-4xl;
+// ==========================================
+// ANIMATED BACKGROUND ELEMENTS
+// ==========================================
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  will-change: transform;
   
-  @include tablet {
-    font-size: $fs-3xl;
+  &.orb-primary {
+    background: rgba($primary, 0.3);
+  }
+  
+  &.orb-secondary {
+    background: rgba($secondary, 0.3);
+  }
+  
+  &.orb-highlight {
+    background: rgba($highlight, 0.2);
   }
 }
 
-h3 {
-  font-size: $fs-3xl;
+.floating-shapes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+// ==========================================
+// SCROLL PROGRESS BAR
+// ==========================================
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: $z-fixed + 1;
   
-  @include tablet {
-    font-size: $fs-2xl;
+  .progress-bar {
+    height: 100%;
+    background: $gradient-primary;
+    box-shadow: $glow-primary;
+    transform-origin: left;
   }
 }
 
-h4 {
-  font-size: $fs-2xl;
-}
+// ==========================================
+// CUSTOM CURSOR
+// ==========================================
 
-h5 {
-  font-size: $fs-xl;
-}
-
-h6 {
-  font-size: $fs-lg;
-}
-
-p {
-  margin-bottom: $spacing-md;
-  color: $text-secondary;
-  font-size: $fs-lg;
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: $z-cursor;
   
-  @include tablet {
-    font-size: $fs-base;
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: $primary;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, background 0.2s ease;
+  }
+  
+  .cursor-ring {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba($primary, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, border-color 0.2s ease;
+  }
+  
+  &.hover {
+    .cursor-dot {
+      transform: translate(-50%, -50%) scale(2);
+      background: $secondary;
+    }
+    
+    .cursor-ring {
+      transform: translate(-50%, -50%) scale(1.5);
+      border-color: rgba($secondary, 0.5);
+    }
   }
 }
 
-// Links
-a {
-  color: $primary-color;
-  text-decoration: none;
-  transition: color $transition-normal;
-  
-  &:hover {
-    color: $secondary-color;
+// Hide default cursor on desktop
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active {
+    cursor: none;
+    
+    a, button, [role="button"] {
+      cursor: none;
+    }
   }
 }
 
-// Lists
+// ==========================================
+// PAGE LOADER
+// ==========================================
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: $background;
+  z-index: 9999;
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-lg;
+  
+  .loader-content {
+    text-align: center;
+    
+    .loader-logo {
+      font-size: $fs-4xl;
+      font-weight: 800;
+      @include text-gradient;
+      margin-bottom: $spacing-lg;
+    }
+    
+    .loader-bar {
+      width: 200px;
+      height: 4px;
+      background: rgba($primary, 0.2);
+      border-radius: $radius-full;
+      overflow: hidden;
+      
+      .loader-progress {
+        height: 100%;
+        background: $gradient-primary;
+        border-radius: $radius-full;
+        animation: loader-fill 1.5s ease-out forwards;
+      }
+    }
+  }
+}
+
+@keyframes loader-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+// ==========================================
+// MOUSE FOLLOWER GLOW
+// ==========================================
+
+.mouse-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba($primary, 0.15) 0%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  filter: blur(40px);
+  transition: opacity 0.3s ease;
+}
+
+// ==========================================
+// ANIMATED GRID BACKGROUND
+// ==========================================
+
+.grid-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba($primary, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba($primary, 0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba($primary, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba($secondary, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba($highlight, 0.05) 0%, transparent 60%);
+  }
+}
+
+// ==========================================
+// LISTS
+// ==========================================
+
 ul, ol {
-  margin-bottom: $spacing-md;
-  padding-left: $spacing-lg;
+  margin-bottom: $spacing-lg;
+  padding-left: $spacing-xl;
+  
+  li {
+    margin-bottom: $spacing-sm;
+    color: $text-secondary;
+  }
 }
 
-li {
-  margin-bottom: $spacing-xs;
+// ==========================================
+// CODE
+// ==========================================
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba($primary, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: $radius-sm;
+  font-size: 0.9em;
+  color: $secondary;
 }
 
-// Images
+pre {
+  background: $background-secondary;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  overflow-x: auto;
+  @include scrollbar-custom;
+  
+  code {
+    background: transparent;
+    padding: 0;
+  }
+}
+
+// ==========================================
+// IMAGES
+// ==========================================
+
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-// Form Elements
-input, textarea, select {
+// ==========================================
+// FORM ELEMENTS
+// ==========================================
+
+input,
+textarea,
+select {
   width: 100%;
-  padding: $spacing-md;
-  border: 2px solid rgba($text-muted, 0.3);
-  border-radius: $radius-md;
-  font-family: inherit;
-  font-size: $fs-base;
-  background: $surface;
+  padding: $spacing-md $spacing-lg;
+  background: rgba($surface, 0.5);
+  border: 2px solid rgba($primary, 0.1);
+  border-radius: $radius-lg;
   color: $text-primary;
-  transition: border-color $transition-normal;
-  -webkit-appearance: none;
-  appearance: none;
+  font-family: $font-primary;
+  font-size: $fs-base;
+  transition: all $transition-normal;
   
-  @include mobile {
-    padding: $spacing-sm $spacing-md;
-    font-size: 16px; /* Prevents zoom on iOS */
+  &::placeholder {
+    color: $text-muted;
   }
   
   &:focus {
     outline: none;
-    border-color: $primary-color;
-  }
-  
-  &::placeholder {
-    color: $text-muted;
-    opacity: 0.7;
+    border-color: $primary;
+    box-shadow: 0 0 0 4px rgba($primary, 0.1);
+    background: rgba($surface, 0.8);
   }
 }
 
-button {
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+textarea {
+  min-height: 150px;
+  resize: vertical;
 }
 
-// Better touch targets for mobile
-@include mobile {
-  a, button, input, select, textarea {
-    min-height: 44px; /* iOS recommended touch target size */
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-// Scrollbar Styling
-::-webkit-scrollbar {
-  width: 8px;
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: $background;
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
-  border-radius: $radius-full;
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, $secondary-color 0%, $primary-color 100%);
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba($primary, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba($primary, 0.6);
+  }
 }
 
-// Animation Classes
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba($primary, 0.3);
+  }
+  50% {
+    border-color: rgba($primary, 0.8);
+  }
 }
 
-.slide-in-left {
-  opacity: 0;
-  transform: translateX(-50px);
-}
+// ==========================================
+// RESPONSIVE HELPERS
+// ==========================================
 
-.slide-in-right {
-  opacity: 0;
-  transform: translateX(50px);
-}
-
-.scale-in {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-// Responsive utilities
-.mobile-only {
-  @include desktop {
+.hide-mobile {
+  @include mobile {
     display: none !important;
   }
 }
 
-.desktop-only {
+.hide-tablet {
   @include tablet {
     display: none !important;
+  }
+}
+
+.show-mobile {
+  display: none !important;
+  
+  @include mobile {
+    display: block !important;
+  }
+}
+
+.show-tablet {
+  display: none !important;
+  
+  @include tablet {
+    display: block !important;
+  }
+}
+
+// ==========================================
+// ACCESSIBILITY
+// ==========================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Focus visible styles
+:focus-visible {
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

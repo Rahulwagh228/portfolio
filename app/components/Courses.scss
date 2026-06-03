@@ -1,0 +1,294 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+// ==========================================
+// COURSES SECTION
+// ==========================================
+
+.courses {
+  @include section-padding;
+  position: relative;
+  overflow: hidden;
+}
+
+// Background
+.courses-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+
+    &.orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($primary, 0.1) 0%, transparent 70%);
+      top: -100px;
+      left: -150px;
+    }
+
+    &.orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba($secondary, 0.12) 0%, transparent 70%);
+      top: 40%;
+      right: -100px;
+    }
+
+    &.orb-3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba($highlight, 0.08) 0%, transparent 70%);
+      bottom: -50px;
+      left: 30%;
+    }
+  }
+}
+
+// Section Description
+.section-description {
+  font-size: $fs-lg;
+  color: $text-secondary;
+  max-width: 600px;
+  line-height: 1.7;
+  margin-top: $spacing-md;
+
+  @include tablet {
+    font-size: $fs-base;
+    max-width: 100%;
+  }
+}
+
+// Courses Grid
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Course Card
+.course-card {
+  @include glass-card;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+
+  &:hover {
+    .course-image {
+      transform: scale(1.08);
+    }
+
+    .image-overlay {
+      opacity: 1;
+    }
+
+    .card-shine {
+      opacity: 1;
+      transform: translateX(100%);
+    }
+
+    .card-border-glow {
+      opacity: 1;
+    }
+  }
+}
+
+// Course Image
+.course-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid rgba($primary, 0.15);
+}
+
+.course-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba($background, 0.7) 100%
+  );
+  opacity: 0.7;
+  transition: opacity $transition-normal;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: $spacing-md;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: rgba($primary, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba($primary, 0.35);
+  border-radius: $radius-full;
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: $primary-light;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.completed-badge {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(34, 197, 94, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: $radius-full;
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: #4ade80;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  svg {
+    color: #4ade80;
+  }
+
+  &.in-progress {
+    background: rgba($highlight, 0.15);
+    border: 1px solid rgba($highlight, 0.3);
+    color: $highlight;
+
+    svg {
+      color: $highlight;
+    }
+  }
+}
+
+// Course Content
+.course-content {
+  padding: $spacing-lg $spacing-xl $spacing-xl;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-title {
+  font-size: $fs-xl;
+  font-weight: 700;
+  color: $text-primary;
+  line-height: 1.35;
+  margin-bottom: $spacing-sm;
+  letter-spacing: -0.01em;
+}
+
+.course-instructor {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $fs-sm;
+  color: $text-muted;
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid rgba($primary, 0.08);
+
+  svg {
+    color: $primary;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-weight: 500;
+  }
+}
+
+// Topics
+.course-topics {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-top: auto;
+}
+
+.topic-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: 1.5;
+
+  .topic-dot {
+    width: 5px;
+    height: 5px;
+    min-width: 5px;
+    border-radius: 50%;
+    background: $gradient-primary;
+    box-shadow: 0 0 8px rgba($primary, 0.5);
+  }
+}
+
+// Card Decorative Effects
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba($white, 0.03) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.8s ease, opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid transparent;
+  background: $gradient-primary border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity $transition-normal;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Gradient Text (reused)
+.courses .gradient-text {
+  @include text-gradient;
+}

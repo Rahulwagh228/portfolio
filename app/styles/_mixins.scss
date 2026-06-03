@@ -1,6 +1,10 @@
 @use 'variables' as *;
 
-// Mixins
+// ==========================================
+// PREMIUM MIXINS - AWWWARDS LEVEL EFFECTS
+// ==========================================
+
+// Layout Mixins
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -13,18 +17,31 @@
   justify-content: space-between;
 }
 
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin grid-center {
   display: grid;
   place-items: center;
 }
 
+// Container
 @mixin container {
+  width: 100%;
   max-width: $xlarge;
   margin: 0 auto;
-  padding: 0 $spacing-lg;
+  padding: 0 $spacing-xl;
   
   @media (max-width: $tablet) {
-    padding: 0 $spacing-md;
+    padding: 0 $spacing-lg;
   }
   
   @media (max-width: $mobile) {
@@ -33,60 +50,97 @@
 }
 
 @mixin section-padding {
-  padding: $spacing-4xl 0;
+  padding: $spacing-5xl 0;
   
   @media (max-width: $tablet) {
-    padding: $spacing-3xl 0;
+    padding: $spacing-4xl 0;
   }
   
   @media (max-width: $mobile) {
-    padding: $spacing-2xl 0;
+    padding: $spacing-3xl 0;
   }
 }
+
+// ==========================================
+// GLASSMORPHISM EFFECTS
+// ==========================================
+
+@mixin glass-card {
+  background: $glass-bg;
+  backdrop-filter: $glass-blur;
+  -webkit-backdrop-filter: $glass-blur;
+  border: 1px solid $glass-border;
+  border-radius: $radius-2xl;
+  box-shadow: $card-shadow;
+  transition: all $transition-normal;
+  
+  &:hover {
+    border-color: rgba($primary, 0.4);
+    box-shadow: $card-shadow-hover, $glow-primary;
+    transform: translateY(-4px);
+  }
+}
+
+@mixin glass-card-subtle {
+  background: rgba($surface, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: $radius-xl;
+}
+
+@mixin glass-effect {
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+// ==========================================
+// BUTTON STYLES
+// ==========================================
 
 @mixin button-base {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: $spacing-sm;
   padding: $spacing-md $spacing-xl;
   border: none;
-  border-radius: $radius-lg;
+  border-radius: $radius-full;
   font-weight: 600;
+  font-size: $fs-base;
   text-decoration: none;
-  transition: all $transition-normal;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  transition: all $transition-normal;
   
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
   }
 }
 
 @mixin button-primary {
   @include button-base;
-  background: $primary-color;
-  color: $surface;
-  box-shadow: $shadow-md;
-  border: 2px solid $primary-color;
+  background: $gradient-primary;
+  color: $white;
+  box-shadow: $glow-primary;
   
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba($surface, 0.1) 0%, rgba($surface, 0) 100%);
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
     opacity: 0;
     transition: opacity $transition-normal;
   }
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-xl;
-    background: $secondary-color;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: $glow-intense;
     
     &::before {
       opacity: 1;
@@ -94,7 +148,7 @@
   }
   
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(0.98);
   }
 }
 
@@ -102,44 +156,268 @@
   @include button-base;
   background: transparent;
   color: $text-primary;
-  border: 2px solid $text-secondary;
+  border: 2px solid rgba($primary, 0.5);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $gradient-primary;
+    opacity: 0;
+    transition: opacity $transition-normal;
+    z-index: -1;
+  }
   
   &:hover {
-    background: $text-primary;
-    color: $surface;
-    border-color: $text-primary;
-    transform: translateY(-2px);
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: $glow-primary;
+    
+    &::before {
+      opacity: 1;
+    }
   }
 }
+
+@mixin button-ghost {
+  @include button-base;
+  background: transparent;
+  color: $text-secondary;
+  padding: $spacing-sm $spacing-md;
+  
+  &:hover {
+    color: $text-primary;
+    background: rgba($primary, 0.1);
+  }
+}
+
+// Magnetic Button Effect (use with JS)
+@mixin magnetic-button {
+  @include button-primary;
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// ==========================================
+// CARD STYLES
+// ==========================================
 
 @mixin card {
-  background: $surface;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-md;
-  border: 1px solid rgba($text-muted, 0.2);
-  transition: all $transition-normal;
+  @include glass-card;
+  padding: $spacing-xl;
+}
+
+@mixin card-interactive {
+  @include card;
+  cursor: pointer;
   
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: $shadow-xl;
-    border-color: rgba($text-primary, 0.2);
+    transform: translateY(-8px) rotateX(2deg);
   }
 }
 
-@mixin glass-effect {
-  background: rgba(white, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(white, 0.2);
+@mixin gradient-border {
+  position: relative;
+  background: $surface;
+  border-radius: $radius-2xl;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: $gradient-primary;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.5;
+    transition: opacity $transition-normal;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
 }
 
+@mixin animated-gradient-border {
+  position: relative;
+  background: $background-secondary;
+  border-radius: $radius-2xl;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: conic-gradient(
+      from 0deg,
+      $primary,
+      $secondary,
+      $highlight,
+      $primary
+    );
+    border-radius: inherit;
+    z-index: -1;
+    animation: rotate-gradient 4s linear infinite;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: $background-secondary;
+    border-radius: calc(#{$radius-2xl} - 2px);
+    z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ==========================================
+// TEXT EFFECTS
+// ==========================================
+
 @mixin text-gradient {
-  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  background: $gradient-primary;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-// Responsive mixins
+@mixin text-gradient-animated {
+  background: linear-gradient(
+    135deg,
+    $primary 0%,
+    $secondary 25%,
+    $highlight 50%,
+    $secondary 75%,
+    $primary 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 5s ease infinite;
+}
+
+@mixin text-glow {
+  text-shadow: 
+    0 0 10px rgba($primary, 0.5),
+    0 0 20px rgba($primary, 0.3),
+    0 0 40px rgba($primary, 0.2);
+}
+
+@mixin text-glow-secondary {
+  text-shadow: 
+    0 0 10px rgba($secondary, 0.5),
+    0 0 20px rgba($secondary, 0.3),
+    0 0 40px rgba($secondary, 0.2);
+}
+
+// ==========================================
+// HOVER EFFECTS
+// ==========================================
+
+@mixin hover-lift {
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl, $glow-primary;
+  }
+}
+
+@mixin hover-glow {
+  transition: box-shadow $transition-normal;
+  
+  &:hover {
+    box-shadow: $glow-primary;
+  }
+}
+
+@mixin hover-scale {
+  transition: transform $transition-spring;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@mixin hover-tilt {
+  transition: transform $transition-normal;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  
+  &:hover {
+    transform: rotateY(-5deg) rotateX(5deg) translateZ(20px);
+  }
+}
+
+// ==========================================
+// SCROLL ANIMATIONS (Use with Framer Motion)
+// ==========================================
+
+@mixin reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+@mixin reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+@mixin reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+@mixin reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+// ==========================================
+// GLOW EFFECTS
+// ==========================================
+
+@mixin glow-orb($color: $primary, $size: 300px) {
+  position: absolute;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba($color, 0.3) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+@mixin glow-line {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $gradient-primary;
+    box-shadow: $glow-primary;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform $transition-normal;
+  }
+  
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+// ==========================================
+// RESPONSIVE MIXINS
+// ==========================================
+
 @mixin mobile {
   @media (max-width: $mobile) {
     @content;
@@ -162,4 +440,148 @@
   @media (min-width: $large) {
     @content;
   }
+}
+
+@mixin xlarge {
+  @media (min-width: $xlarge) {
+    @content;
+  }
+}
+
+// ==========================================
+// KEYFRAME ANIMATIONS
+// ==========================================
+
+@keyframes rotate-gradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ==========================================
+// UTILITY MIXINS
+// ==========================================
+
+@mixin scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: $primary $background;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $background;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $primary;
+    border-radius: $radius-full;
+  }
+}
+
+@mixin selection {
+  &::selection {
+    background: rgba($primary, 0.3);
+    color: $text-primary;
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
