@@ -1,4 +1,5 @@
 import "./globals.scss";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: 'Rahul Wagh - Full Stack Developer & UI/UX Designer',
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <GoogleAnalytics gaId="G-V82Z3E4JB1" />
       </body>
     </html>
   );
