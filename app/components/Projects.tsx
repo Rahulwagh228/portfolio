@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Github, ExternalLink, MessageSquare, Brain, TrendingUp, Sparkles, Layout, Store, GraduationCap } from "lucide-react";
-// import "./Projects.scss";
+import "./Projects.scss";
 
 interface Project {
   id: number;
