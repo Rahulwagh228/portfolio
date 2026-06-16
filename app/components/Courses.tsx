@@ -92,6 +92,29 @@ const Courses = () => {
       ],
       status: "completed",
     },
+    {
+      id: 6,
+      title: "Claude 101",
+      instructor: "Anthropic",
+      platform: "Anthropic Academy",
+      image: "/images/courses/claude-101.png",
+      topics: [
+        "Claude Fundamentals",
+        "Prompt Engineering Basics",
+        "Real-World AI Use Cases",
+        "Claude Capabilities & Limitations",
+      ],
+      status: "completed",
+    },
+    {
+      id: 7,
+      title: "AI Fluency: Framework & Foundations",
+      instructor: "Anthropic Academy",
+      platform: "Anthropic Academy",
+      image: "/images/courses/ai-fluency-framework-foundations.png",
+      topics: ["Delegation", "Description", "Discernment", "Diligence"],
+      status: "completed",
+    },
   ];
 
   const containerVariants = {
@@ -171,9 +194,17 @@ const Courses = () => {
                 <div className="image-overlay">
                   <span className="platform-badge">{course.platform}</span>
                 </div>
-                <div className={`completed-badge ${course.status === "in-progress" ? "in-progress" : ""}`}>
-                  {course.status === "in-progress" ? <Clock size={14} /> : <CheckCircle size={14} />}
-                  {course.status === "in-progress" ? "In Progress" : "Completed"}
+                <div
+                  className={`completed-badge ${course.status === "in-progress" ? "in-progress" : ""}`}
+                >
+                  {course.status === "in-progress" ? (
+                    <Clock size={14} />
+                  ) : (
+                    <CheckCircle size={14} />
+                  )}
+                  {course.status === "in-progress"
+                    ? "In Progress"
+                    : "Completed"}
                 </div>
               </div>
 
