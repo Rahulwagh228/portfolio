@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { MapPin, Briefcase, GraduationCap, Code, Zap, Target } from "lucide-react";
+import { MapPin, Briefcase, GraduationCap, Code, Brain, Cloud } from "lucide-react";
 import "./About.scss";
 
 const About = () => {
@@ -16,14 +16,14 @@ const About = () => {
       description: "Building end-to-end solutions with modern technologies",
     },
     {
-      icon: Zap,
-      title: "Performance Optimization",
-      description: "Creating lightning-fast applications that scale",
+      icon: Brain,
+      title: "AI & RAG Engineering",
+      description: "Designing LLM-powered agents and retrieval pipelines",
     },
     {
-      icon: Target,
-      title: "System Design",
-      description: "Architecting robust and maintainable systems",
+      icon: Cloud,
+      title: "Cloud & DevOps",
+      description: "Containerizing and deploying with Docker, Kubernetes, and AWS",
     },
   ];
 
@@ -33,9 +33,21 @@ const About = () => {
     "PostgreSQL",
     "MongoDB",
     "Redis",
+    "Docker",
+    "Kubernetes",
     "AWS",
+    "LangChain",
+    "LangGraph",
+    "Pinecone",
     "TypeScript",
+    "JavaScript",
+    "React",
+    "Express",
+    "LLM",
+    "RAG",
     "System Design",
+    "OpenAI API",
+    "pgvector",
   ];
 
   const containerVariants = {
@@ -97,7 +109,8 @@ const About = () => {
 
                 <p className="about-text">
                   Full-Stack Developer with <strong>2+ years of experience</strong> building 
-                  scalable web applications. I specialize in modern technologies like 
+                  scalable web applications and AI-powered systems. I specialize in modern 
+                  technologies like 
                   <span className="highlight"> Next.js</span>, 
                   <span className="highlight"> Node.js</span>, 
                   <span className="highlight"> PostgreSQL</span>, and 
@@ -105,15 +118,19 @@ const About = () => {
                 </p>
 
                 <p className="about-text">
-                  My expertise spans across backend engineering, frontend development, 
-                  and system design. I&apos;m passionate about building efficient, 
-                  performant applications that solve real-world problems.
+                  My expertise spans backend engineering, building 
+                  <span className="highlight"> AI agents</span> and 
+                  <span className="highlight"> RAG pipelines</span> with LangChain, LangGraph, 
+                  and vector databases like Pinecone and pgvector, alongside frontend 
+                  development and system design.
                 </p>
 
                 <p className="about-text">
-                  Currently diving deep into <span className="highlight">C++</span> for 
-                  high-performance systems and expanding my knowledge in distributed 
-                  systems architecture.
+                  I also handle the full deployment lifecycle—containerizing applications with 
+                  <span className="highlight"> Docker</span>, orchestrating them with 
+                  <span className="highlight"> Kubernetes</span>, and deploying on 
+                  <span className="highlight"> AWS</span> (EC2, S3) with Redis caching and 
+                  automated cron jobs for production-grade reliability.
                 </p>
               </div>
 
@@ -158,7 +175,7 @@ const About = () => {
               <Briefcase size={20} />
               <div>
                 <span className="info-label">Currently</span>
-                <span className="info-value">Full-Stack Developer</span>
+                <span className="info-value">Full-Stack & AI Engineer</span>
               </div>
             </div>
             <div className="info-card">

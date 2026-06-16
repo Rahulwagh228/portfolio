@@ -27,7 +27,7 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Classly",
+      title: "Classsly",
       description: "Classes management system",
       longDescription:
         "A comprehensive classes management system for coaching institutes — manage classes, batches, students, attendance, fees, and day-to-day operations from a single dashboard.",
@@ -40,7 +40,7 @@ const Projects = () => {
         "Attendance tracking",
         "Admin dashboard",
       ],
-      live: "https://class-tech-sooty.vercel.app/",
+      live: "https://classsly.in/",
       github: "https://github.com/Rahulwagh228",
       status: "completed",
     },

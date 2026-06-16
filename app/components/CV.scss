@@ -1,0 +1,209 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.cv {
+  @include section-padding;
+  position: relative;
+  overflow: hidden;
+}
+
+// Background
+.cv-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+
+    &.orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($primary, 0.15) 0%, transparent 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba($secondary, 0.1) 0%, transparent 70%);
+      bottom: 0;
+      right: -100px;
+    }
+  }
+}
+
+.cv-content {
+  max-width: 700px;
+  margin: $spacing-3xl auto;
+  position: relative;
+  z-index: 1;
+}
+
+// CV Card
+.cv-card {
+  padding: $spacing-3xl;
+  display: flex;
+  align-items: center;
+  gap: $spacing-2xl;
+
+  @include tablet {
+    flex-direction: column;
+    text-align: center;
+    padding: $spacing-2xl;
+  }
+
+  @include mobile {
+    padding: $spacing-xl;
+    gap: $spacing-xl;
+  }
+}
+
+.cv-icon {
+  width: 100px;
+  height: 100px;
+  background: $gradient-primary;
+  border-radius: $radius-2xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  flex-shrink: 0;
+  box-shadow: $glow-primary;
+
+  @include mobile {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.cv-info {
+  flex: 1;
+
+  h3 {
+    font-size: $fs-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include mobile {
+      font-size: $fs-xl;
+    }
+  }
+
+  p {
+    font-size: $fs-base;
+    color: $text-secondary;
+    margin-bottom: 0;
+  }
+}
+
+// Download Button
+.download-btn {
+  @include button-primary;
+  gap: $spacing-sm;
+  font-size: $fs-lg;
+  padding: $spacing-lg $spacing-2xl;
+  flex-shrink: 0;
+
+  @include tablet {
+    flex-shrink: 1;
+  }
+
+  @include mobile {
+    width: 100%;
+    padding: $spacing-md $spacing-lg;
+    font-size: $fs-base;
+  }
+}
+
+// Info Section
+.cv-info-section {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.info-item {
+  padding: $spacing-2xl;
+  text-align: center;
+  border-radius: $radius-xl;
+  transition: all $transition-normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-color: rgba($primary, 0.3);
+    background: rgba($surface, 0.6);
+    transform: translateY(-4px);
+  }
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.info-number {
+  font-size: $fs-3xl;
+  font-weight: 700;
+  background: $gradient-primary;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: $spacing-sm;
+
+  @include mobile {
+    font-size: $fs-2xl;
+  }
+}
+
+.info-text {
+  font-size: $fs-sm;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+// Gradient Text
+.gradient-text {
+  @include text-gradient;
+}
+
+// Section Description
+.section-description {
+  font-size: $fs-lg;
+  color: $text-secondary;
+  margin-top: $spacing-lg;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mobile {
+    font-size: $fs-base;
+  }
+}

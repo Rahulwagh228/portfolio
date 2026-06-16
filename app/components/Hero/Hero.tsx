@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
-import { Github, Linkedin, Mail, ChevronDown, Code2, Database, Server } from "lucide-react";
+import { Github, Linkedin, Mail, ChevronDown, Code2, Brain, Database } from "lucide-react";
 import "./Hero.scss";
 
 const Hero = () => {
@@ -10,6 +10,7 @@ const Hero = () => {
   const isInView = useInView(heroRef, { once: true });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<Array<{ id: number; left: string; top: string; duration: number; delay: number }>>([]);
+  const [floatingSkills, setFloatingSkills] = useState<Array<{ id: number; name: string; left: string; top: string; duration: number; delay: number; drift: number }>>([]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -49,6 +50,43 @@ const Hero = () => {
     })));
   }, []);
 
+  // Skills pulled from CV: full-stack, AI/RAG, and deployment stack
+  useEffect(() => {
+    const skillsList = [
+      "Next.js",
+      "Node.js",
+      "TypeScript",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "Kubernetes",
+      "AWS EC2",
+      "AWS S3",
+      "LangChain",
+      "LangGraph",
+      "Pinecone",
+      "pgvector",
+      "LLM",
+      "RAG",
+      "System Design",
+      "React",
+      "Express",
+    ];
+
+    setFloatingSkills(
+      skillsList.map((name, i) => ({
+        id: i,
+        name,
+        left: `${5 + Math.random() * 85}%`,
+        top: `${5 + Math.random() * 85}%`,
+        duration: 6 + Math.random() * 5,
+        delay: Math.random() * 4,
+        drift: 10 + Math.random() * 12,
+      }))
+    );
+  }, []);
+
   const stats = [
     { value: "2+", label: "Years Experience" },
     { value: "80+", label: "Problems Solved" },
@@ -81,8 +119,8 @@ const Hero = () => {
 
   const floatingIcons = [
     { Icon: Code2, delay: 0 },
-    { Icon: Database, delay: 0.2 },
-    { Icon: Server, delay: 0.4 },
+    { Icon: Brain, delay: 0.2 },
+    { Icon: Database, delay: 0.4 },
   ];
 
   return (
@@ -147,6 +185,34 @@ const Hero = () => {
           ))}
         </div>
 
+        {/* Floating Skill Tags */}
+        <div className="floating-skills">
+          {floatingSkills.map((skill) => (
+            <motion.div
+              key={skill.id}
+              className="skill-tag"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: [0.35, 0.85, 0.35],
+                y: [-skill.drift, skill.drift, -skill.drift],
+                x: [-skill.drift / 2, skill.drift / 2, -skill.drift / 2],
+              }}
+              transition={{
+                duration: skill.duration,
+                repeat: Infinity,
+                delay: skill.delay,
+                ease: "easeInOut",
+              }}
+              style={{
+                left: skill.left,
+                top: skill.top,
+              }}
+            >
+              {skill.name}
+            </motion.div>
+          ))}
+        </div>
+
         {/* Grid Lines */}
         <div className="grid-overlay" />
       </div>
@@ -195,14 +261,16 @@ const Hero = () => {
               <motion.div className="hero-role" variants={itemVariants}>
                 <span className="role-text">Full Stack Developer</span>
                 <span className="role-divider">|</span>
-                <span className="role-text">Backend Engineer</span>
+                <span className="role-text">AI &amp; RAG Engineer</span>
                 <span className="role-divider">|</span>
-                <span className="role-text">System Design Enthusiast</span>
+                <span className="role-text">Backend Specialist</span>
               </motion.div>
 
               <motion.p className="hero-description" variants={itemVariants}>
-                Building scalable systems, beautiful interfaces, and
-                performance-driven applications that make a difference.
+                Building scalable full-stack applications and intelligent AI systems—designing
+                RAG pipelines and LLM-powered agents with LangChain, LangGraph, and vector
+                databases like Pinecone and pgvector, then containerizing and deploying them
+                with Docker, Kubernetes, and AWS (EC2, S3) for production-grade reliability.
               </motion.p>
 
               <motion.div className="hero-cta" variants={itemVariants}>
@@ -268,8 +336,8 @@ const Hero = () => {
                   </div>
                 </motion.div>
                 <div className="avatar-badge">
-                  <Code2 size={16} />
-                  <span>Developer</span>
+                  <Brain size={16} />
+                  <span>AI Engineer</span>
                 </div>
               </div>
             </motion.div>
