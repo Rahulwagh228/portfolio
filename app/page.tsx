@@ -7,6 +7,7 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Courses from './components/Courses';
 import Leadership from './components/Leadership';
+import CV from './components/CV';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -37,6 +38,9 @@ export default function Home() {
       </section>
       <section id="leadership">
         <Leadership />
+      </section>
+      <section id="cv">
+        <CV />
       </section>
       <section id="contact">
         <Contact />
